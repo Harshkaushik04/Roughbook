@@ -505,7 +505,8 @@ const pickr = Pickr.create({
         hue: true,
     },
 })
-    .on('init', (pickr) => {
+    .on('init', (pickr)  => {
+    console.log('Function called: pickr');
         themeCustom.input.value = pickr.getSelectedColor().toHEXA().toString(0);
     })
     .on('change', (color) => {
@@ -699,6 +700,7 @@ let geo;
  * @returns {void}
  */
 function loadGeo() {
+    console.log('Function called: loadGeo');
     geo = new PeerGeoLocation({
         room_id: roomId,
         peer_name: myPeerName,
@@ -716,6 +718,7 @@ function loadGeo() {
  * Load all Html elements by Id
  */
 function getHtmlElementsById() {
+    console.log('Function called: getHtmlElementsById');
     // My video elements
     myVideo = getId('myVideo');
     myScreen = getId('myScreen');
@@ -739,6 +742,7 @@ function getHtmlElementsById() {
  * https://atomiks.github.io/tippyjs/
  */
 function setButtonsToolTip() {
+    console.log('Function called: setButtonsToolTip');
     // Not need for mobile
     if (isMobileDevice) return;
     // Init buttons
@@ -837,6 +841,7 @@ function setButtonsToolTip() {
  * @returns void
  */
 function refreshMainButtonsToolTipPlacement() {
+    console.log('Function called: refreshMainButtonsToolTipPlacement');
     // not need for mobile
     if (isMobileDevice) return;
 
@@ -875,6 +880,7 @@ function refreshMainButtonsToolTipPlacement() {
  * @param {string} placement position
  */
 function setTippy(element, content, placement) {
+    console.log('Function called: setTippy');
     if (isMobileDevice) return;
     if (element) {
         if (element._tippy) {
@@ -898,6 +904,7 @@ function setTippy(element, content, placement) {
  * @returns {object} peer info
  */
 function getPeerInfo() {
+    console.log('Function called: getPeerInfo');
     return {
         isDesktopDevice: isDesktopDevice,
         isMobileDevice: isMobileDevice,
@@ -916,11 +923,13 @@ function getPeerInfo() {
  * @returns object info
  */
 function getInfo() {
+    console.log('Function called: getInfo');
     try {
         console.log('Info', parserResult);
 
         // Filter out properties with 'Unknown' values
         const filterUnknown = (obj) => {
+    console.log('Function called: filterUnknown');
             const filtered = {};
             for (const [key, value] of Object.entries(obj)) {
                 if (value && value !== 'Unknown') {
@@ -955,6 +964,7 @@ function getInfo() {
  * @returns {string} Signaling server URL
  */
 function getSignalingServer() {
+    console.log('Function called: getSignalingServer');
     console.log('00 Location', window.location);
     return window.location.protocol + '//' + window.location.hostname;
 }
@@ -964,6 +974,7 @@ function getSignalingServer() {
  * @returns {string} Room Id
  */
 function getRoomId() {
+    console.log('Function called: getRoomId');
     // check if passed as params /join?room=id
     let qs = new URLSearchParams(window.location.search);
     let queryRoomId = filterXSS(qs.get('room'));
@@ -993,6 +1004,7 @@ function getRoomId() {
  * @returns {string} random id
  */
 function makeId(length) {
+    console.log('Function called: makeId');
     let result = '';
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
@@ -1007,6 +1019,7 @@ function makeId(length) {
  * @returns uuid4
  */
 function getUUID() {
+    console.log('Function called: getUUID');
     const uuid4 = ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
         (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16)
     );
@@ -1022,6 +1035,7 @@ function getUUID() {
  * @returns {boolean} true/false (default true)
  */
 function getNotify() {
+    console.log('Function called: getNotify');
     let qs = new URLSearchParams(window.location.search);
     let notify = filterXSS(qs.get('notify'));
     if (notify) {
@@ -1041,6 +1055,7 @@ function getNotify() {
  * @returns {boolean} true/false
  */
 function getChat() {
+    console.log('Function called: getChat');
     let qs = new URLSearchParams(window.location.search);
     let chat = filterXSS(qs.get('chat'));
     if (chat) {
@@ -1060,6 +1075,7 @@ function getChat() {
  * @returns {mixed} boolean false or token string
  */
 function getPeerToken() {
+    console.log('Function called: getPeerToken');
     if (window.sessionStorage.peer_token) return window.sessionStorage.peer_token;
     let qs = new URLSearchParams(window.location.search);
     let token = filterXSS(qs.get('token'));
@@ -1076,6 +1092,7 @@ function getPeerToken() {
  * @returns {string} Peer Name
  */
 function getPeerName() {
+    console.log('Function called: getPeerName');
     const qs = new URLSearchParams(window.location.search);
     const name = filterXSS(qs.get('name'));
     if (isHtml(name)) {
@@ -1091,6 +1108,7 @@ function getPeerName() {
  * @returns {string} Peer Avatar
  */
 function getPeerAvatar() {
+    console.log('Function called: getPeerAvatar');
     const qs = new URLSearchParams(window.location.search);
     const avatar = filterXSS(qs.get('avatar'));
     const avatarDisabled = avatar === '0' || avatar === 'false';
@@ -1108,6 +1126,7 @@ function getPeerAvatar() {
  * @returns {boolean} true/false
  */
 function getScreenEnabled() {
+    console.log('Function called: getScreenEnabled');
     let qs = new URLSearchParams(window.location.search);
     let screen = filterXSS(qs.get('screen'));
     if (screen) {
@@ -1125,6 +1144,7 @@ function getScreenEnabled() {
  * @returns {boolean} true/false
  */
 function getHideMeActive() {
+    console.log('Function called: getHideMeActive');
     let qs = new URLSearchParams(window.location.search);
     let hide = filterXSS(qs.get('hide'));
     let queryHideMe = false;
@@ -1141,6 +1161,7 @@ function getHideMeActive() {
  * @returns {boolean} true/false
  */
 function thereArePeerConnections() {
+    console.log('Function called: thereArePeerConnections');
     if (Object.keys(peerConnections).length === 0) return false;
     return true;
 }
@@ -1150,6 +1171,7 @@ function thereArePeerConnections() {
  * @returns peer connections count
  */
 function countPeerConnections() {
+    console.log('Function called: countPeerConnections');
     return Object.keys(peerConnections).length;
 }
 
@@ -1165,6 +1187,7 @@ document.addEventListener('DOMContentLoaded', function () {
  */
 // ... in client.js ...
 function initClientPeer() {
+    console.log('Function called: initClientPeer');
     setTheme();
 
     // Set new "Rough book" brand title
@@ -1191,7 +1214,8 @@ function initClientPeer() {
     console.log('02. Connection transport', transport);
 
     // Check upgrade transport
-    signalingSocket.io.engine.on('upgrade', () => {
+    signalingSocket.io.engine.on('upgrade', ()  => {
+    console.log('Function called: transport');
         const upgradedTransport = signalingSocket.io.engine.transport.name; // in most cases, "websocket"
         console.log('Connection upgraded transport', upgradedTransport);
     });
@@ -1200,7 +1224,8 @@ function initClientPeer() {
 
     // Add these 2 lines for the text editor
     signalingSocket.on('textEditorAction', handleTextEditorAction);
-    signalingSocket.on('textEditorUpdate', (config) => {
+    signalingSocket.on('textEditorUpdate', (config)  => {
+    console.log('Function called: upgradedTransport');
         if (textEditorElement) {
             textEditorElement.value = config.text;
         }
@@ -1210,6 +1235,7 @@ function initClientPeer() {
 
     // async - await requests
     signalingSocket.request = function request(type, data = {}) {
+    console.log('Function called: request');
         return new Promise((resolve, reject) => {
             signalingSocket.emit(type, data, (data) => {
                 if (data.error) {
@@ -1255,6 +1281,7 @@ function initClientPeer() {
  * @param {object} config data to send to signaling server
  */
 async function sendToServer(msg, config = {}) {
+    console.log('Function called: sendToServer');
     await signalingSocket.emit(msg, config);
 }
 
@@ -1263,6 +1290,7 @@ async function sendToServer(msg, config = {}) {
  * @param {object} config data
  */
 async function sendToDataChannel(config) {
+    console.log('Function called: sendToDataChannel');
     if (thereArePeerConnections() && typeof config === 'object' && config !== null) {
         for (let peer_id in chatDataChannels) {
             if (chatDataChannels[peer_id].readyState === 'open')
@@ -1276,6 +1304,7 @@ async function sendToDataChannel(config) {
  * microphone/cam, join the channel and start peering up
  */
 async function handleConnect() {
+    console.log('Function called: handleConnect');
     console.log('03. Connected to signaling server');
 
     myPeerId = signalingSocket.id;
@@ -1312,6 +1341,7 @@ async function handleConnect() {
  * @param {object} config data
  */
 function handleServerInfo(config) {
+    console.log('Function called: handleServerInfo');
     console.log('13. Server info', config);
 
     const { peers_count, host_protected, user_auth, is_presenter, survey, redirect, maxRoomParticipants } = config;
@@ -1344,11 +1374,11 @@ function handleServerInfo(config) {
         handleRules(isPresenter);
     }
 
-    // if (notify && peers_count == 1) {
-    //     shareRoomMeetingURL(true);
-    // } else {
-    //     checkShareScreen();
-    // }
+    if (notify && peers_count == 1) {
+        shareRoomMeetingURL(true);
+    } else {
+        checkShareScreen();
+    }
 
     checkChatOnJoin();
 }
@@ -1357,6 +1387,7 @@ function handleServerInfo(config) {
  * HOST_USER_AUTH enabled and peer not match valid username and password
  */
 function handleUnauthorized() {
+    console.log('Function called: handleUnauthorized');
     playSound('alert');
     Swal.fire({
         allowOutsideClick: false,
@@ -1379,6 +1410,7 @@ function handleUnauthorized() {
  * will be redirected to home page
  */
 function roomIsBusy() {
+    console.log('Function called: roomIsBusy');
     signalingSocket.disconnect();
     playSound('alert');
     Swal.fire({
@@ -1407,6 +1439,7 @@ function roomIsBusy() {
  * @param {boolean} isPresenter true/false
  */
 function handleRules(isPresenter) {
+    console.log('Function called: handleRules');
     console.log('14. Peer isPresenter: ' + isPresenter + ' Reconnected to signaling server: ' + isPeerReconnected);
     if (!isPresenter) {
         buttons.settings.showTabRoomParticipants = false;
@@ -1437,6 +1470,7 @@ function handleRules(isPresenter) {
  * Hide not desired buttons
  */
 function handleButtonsRule() {
+    console.log('Function called: handleButtonsRule');
     // Main buttons
     displayElements([
         { element: shareRoomBtn, display: buttons.main.showShareRoomBtn },
@@ -1510,6 +1544,7 @@ function handleButtonsRule() {
  * Get Buttons config from server side and apply to current client
  */
 async function getButtons() {
+    console.log('Function called: getButtons');
     try {
         const response = await axios.get('/buttons', {
             timeout: 5000,
@@ -1535,6 +1570,7 @@ async function getButtons() {
  * @returns {object} merged object
  */
 function mergeConfig(target, source) {
+    console.log('Function called: mergeConfig');
     if (typeof target !== 'object' || target === null) return source;
     if (typeof source !== 'object' || source === null) return source;
     const output = Array.isArray(target) ? target.slice() : { ...target };
@@ -1555,6 +1591,7 @@ function mergeConfig(target, source) {
  * @returns {string} Peer Name
  */
 async function getUserName() {
+    console.log('Function called: getUserName');
     try {
         const { data: profile } = await axios.get('/profile', { timeout: 5000 });
         if (profile && profile.name) {
@@ -1571,6 +1608,7 @@ async function getUserName() {
  * set your name for the conference
  */
 async function whoAreYou() {
+    console.log('Function called: whoAreYou');
     console.log('11. Who are you?');
 
     document.body.style.background = 'var(--body-bg)';
@@ -1741,6 +1779,7 @@ async function whoAreYou() {
  * Refresh all LS devices
  */
 async function refreshLsDevices() {
+    console.log('Function called: refreshLsDevices');
     lS.setLocalStorageDevices(lS.MEDIA_TYPE.video, videoSelect.selectedIndex, videoSelect.value);
     lS.setLocalStorageDevices(lS.MEDIA_TYPE.audio, audioInputSelect.selectedIndex, audioInputSelect.value);
     lS.setLocalStorageDevices(lS.MEDIA_TYPE.speaker, audioOutputSelect.selectedIndex, audioOutputSelect.value);
@@ -1752,6 +1791,7 @@ async function refreshLsDevices() {
  * @returns boolean
  */
 async function checkUserName(peer_name = null) {
+    console.log('Function called: checkUserName');
     return signalingSocket
         .request('data', {
             room_id: roomId,
@@ -1767,6 +1807,7 @@ async function checkUserName(peer_name = null) {
  * Username already in the room
  */
 function userNameAlreadyInRoom() {
+    console.log('Function called: userNameAlreadyInRoom');
     signalingSocket.disconnect();
     playSound('alert');
     Swal.fire({
@@ -1792,6 +1833,7 @@ function userNameAlreadyInRoom() {
  * Load settings from Local Storage
  */
 async function loadLocalStorage() {
+    console.log('Function called: loadLocalStorage');
     const localStorageDevices = lS.getLocalStorageDevices();
     console.log('12. Get Local Storage Devices before', localStorageDevices);
     if (localStorageDevices) {
@@ -1867,6 +1909,7 @@ async function loadLocalStorage() {
  * @return boolean
  */
 function selectOptionByValueExist(selectElement, value) {
+    console.log('Function called: selectOptionByValueExist');
     let foundValue = false;
     for (let i = 0; i < selectElement.options.length; i++) {
         if (selectElement.options[i].value === value) {
@@ -1882,6 +1925,7 @@ function selectOptionByValueExist(selectElement, value) {
  * Check int config from local storage
  */
 async function checkInitConfig() {
+    console.log('Function called: checkInitConfig');
     const initConfig = lS.getInitConfig();
     console.log('Get init config', initConfig);
     if (initConfig) {
@@ -1897,6 +1941,7 @@ async function checkInitConfig() {
  * @returns {string} 'user' (front) or 'environment' (rear).
  */
 function detectCameraFacingMode(stream) {
+    console.log('Function called: detectCameraFacingMode');
     if (!stream || !stream.getVideoTracks().length) {
         console.warn("No video track found in the stream. Defaulting to 'user'.");
         return 'user';
@@ -1914,6 +1959,7 @@ function detectCameraFacingMode(stream) {
  * @param {string} deviceId
  */
 async function changeInitCamera(deviceId) {
+    console.log('Function called: changeInitCamera');
     // Stop media tracks to avoid issue on mobile
     if (initStream) {
         await stopTracks(initStream);
@@ -1954,6 +2000,7 @@ async function changeInitCamera(deviceId) {
      * @param {MediaStream} camStream
      */
     function updateInitLocalVideoMediaStream(camStream) {
+    console.log('Function called: updateInitLocalVideoMediaStream');
         if (camStream) {
             // Detect camera
             camera = detectCameraFacingMode(camStream);
@@ -1980,6 +2027,7 @@ async function changeInitCamera(deviceId) {
      * @param {object} err
      */
     function reloadBrowser(err) {
+    console.log('Function called: reloadBrowser');
         console.error('[Error] changeInitCamera', err);
         userLog('error', 'Error while swapping init camera' + err);
         initVideoSelect.selectedIndex = 0;
@@ -1997,6 +2045,7 @@ async function changeInitCamera(deviceId) {
  * @param {string} deviceId
  */
 async function changeLocalCamera(deviceId) {
+    console.log('Function called: changeLocalCamera');
     if (localVideoMediaStream) {
         await stopVideoTracks(localVideoMediaStream);
     }
@@ -2034,6 +2083,7 @@ async function changeLocalCamera(deviceId) {
      * @param {MediaStream} camStream
      */
     async function updateLocalVideoMediaStream(camStream) {
+    console.log('Function called: updateLocalVideoMediaStream');
         if (camStream) {
             camera = detectCameraFacingMode(camStream);
             console.log('Detect Camera facing mode', camera);
@@ -2050,6 +2100,7 @@ async function changeLocalCamera(deviceId) {
      * @param {object} err
      */
     function printError(err) {
+    console.log('Function called: printError');
         console.error('[Error] changeLocalCamera', err);
         userLog('error', 'Error while swapping local camera ' + err);
     }
@@ -2060,6 +2111,7 @@ async function changeLocalCamera(deviceId) {
  * @param {string} deviceId
  */
 async function changeLocalMicrophone(deviceId) {
+    console.log('Function called: changeLocalMicrophone');
     if (localAudioMediaStream) {
         await stopAudioTracks(localAudioMediaStream);
     }
@@ -2070,7 +2122,8 @@ async function changeLocalMicrophone(deviceId) {
 
     await navigator.mediaDevices
         .getUserMedia(audioConstraints)
-        .then(async (micStream) => {
+        .then(async (micStream)  => {
+    console.log('Function called: audioConstraints');
             myAudio.srcObject = micStream;
             localAudioMediaStream = micStream;
             logStreamSettingsInfo('Success attached local microphone stream', micStream);
@@ -2090,6 +2143,7 @@ async function changeLocalMicrophone(deviceId) {
  * 1/true = enabled / 0/false = disabled
  */
 function checkPeerAudioVideo() {
+    console.log('Function called: checkPeerAudioVideo');
     let qs = new URLSearchParams(window.location.search);
     let audio = filterXSS(qs.get('audio'));
     let video = filterXSS(qs.get('video'));
@@ -2113,6 +2167,7 @@ function checkPeerAudioVideo() {
  * Enable RNNoise audio processing for noise suppression
  */
 async function enableNoiseSuppression() {
+    console.log('Function called: enableNoiseSuppression');
     if (!localAudioMediaStream) {
         userLog('error', 'No local audio stream available for noise suppression.');
         return;
@@ -2128,6 +2183,7 @@ async function enableNoiseSuppression() {
  * Disable RNNoise audio processing for noise suppression
  */
 async function disableNoiseSuppression() {
+    console.log('Function called: disableNoiseSuppression');
     if (noiseProcessor) {
         localAudioMediaStream = noiseProcessor.mediaStream || localAudioMediaStream;
         await refreshMyStreamToPeers(localAudioMediaStream, true);
@@ -2143,6 +2199,7 @@ async function disableNoiseSuppression() {
  * Restart noise suppression (e.g. after changing mic)
  */
 async function restartNoiseSuppression() {
+    console.log('Function called: restartNoiseSuppression');
     if (!lsSettings.mic_noise_suppression) return;
     await disableNoiseSuppression();
     await enableNoiseSuppression();
@@ -2152,6 +2209,7 @@ async function restartNoiseSuppression() {
  * Room and Peer name are ok Join Channel
  */
 async function whoAreYouJoin() {
+    console.log('Function called: whoAreYouJoin');
     myVideoPeerName.innerText = myPeerName + ' (me)';
     setPeerAvatarImgName('myVideoAvatarImage', myPeerName, myPeerAvatar);
     setPeerAvatarImgName('myProfileAvatar', myPeerName, myPeerAvatar);
@@ -2173,6 +2231,7 @@ async function whoAreYouJoin() {
  * join to channel and send some peer info
  */
 async function joinToChannel() {
+    console.log('Function called: joinToChannel');
     console.log('12. join to channel', roomId);
     sendToServer('join', {
         join_data_time: getDataTimeString(),
@@ -2203,6 +2262,7 @@ async function joinToChannel() {
  * @param {object} config data
  */
 async function handleAddPeer(config) {
+    console.log('Function called: handleAddPeer');
     //console.log("addPeer", JSON.stringify(config));
 
     const { peer_id, should_create_offer, iceServers, peers } = config;
@@ -2282,6 +2342,7 @@ async function handleAddPeer(config) {
  * @param {string} peer_id socket.id
  */
 async function handlePeersConnectionStatus(peer_id) {
+    console.log('Function called: handlePeersConnectionStatus');
     peerConnections[peer_id].onconnectionstatechange = function (event) {
         const connectionStatus = event.currentTarget.connectionState;
         const signalingState = event.currentTarget.signalingState;
@@ -2302,6 +2363,7 @@ async function handlePeersConnectionStatus(peer_id) {
  * @param {string} peer_id socket.id
  */
 async function handleOnIceCandidate(peer_id) {
+    console.log('Function called: handleOnIceCandidate');
     peerConnections[peer_id].onicecandidate = (event) => {
         if (!event.candidate || !event.candidate.candidate) return;
 
@@ -2364,6 +2426,7 @@ async function handleOnIceCandidate(peer_id) {
  * @param {object} peers all peers info connected to the same room
  */
 async function handleOnTrack(peer_id, peers) {
+    console.log('Function called: handleOnTrack');
     console.log('[ON TRACK] - peer_id', { peer_id: peer_id });
 
     peerConnections[peer_id].ontrack = (event) => {
@@ -2454,8 +2517,7 @@ async function handleOnTrack(peer_id, peers) {
                     }
 
                     // CAMERA
-                    const mainHasVideo =
-                        remoteVideoStream && remoteVideoStream.srcObject && hasVideoTrack(remoteVideoStream.srcObject);
+                    const mainHasVideo = remoteVideoStream && remoteVideoStream.srcObject && hasVideoTrack(remoteVideoStream.srcObject);
 
                     if (peerInfo.peer_video_status) {
                         console.log(`[ON TRACK] - CLASSIFIED AS VIDEO -> ${peer_name}`);
@@ -2489,7 +2551,8 @@ async function handleOnTrack(peer_id, peers) {
                         console.log(`[ON TRACK] - Attaching audio stream to existing element for ${peer_name}`);
                         attachMediaStream(remoteAudioStream, inbound);
                         // Ensure audio plays
-                        remoteAudioStream.play().catch((err) => {
+                        remoteAudioStream.play().catch((err)  => {
+    console.log('Function called: mainHasVideo');
                             console.warn('[AUDIO] Autoplay prevented, setting up fallback:', err);
                             handleAudioFallback(remoteAudioStream, peer_name);
                         });
@@ -2515,6 +2578,7 @@ async function handleOnTrack(peer_id, peers) {
  * @param {string} peer_id socket.id
  */
 async function handleAddTracks(peer_id) {
+    console.log('Function called: handleAddTracks');
     const pc = peerConnections[peer_id];
     const peer_name = allPeers[peer_id]['peer_name'];
 
@@ -2553,6 +2617,7 @@ async function handleAddTracks(peer_id) {
  * @param {string} peer_id socket.id
  */
 async function handleRTCDataChannels(peer_id) {
+    console.log('Function called: handleRTCDataChannels');
     peerConnections[peer_id].ondatachannel = (event) => {
         console.log('handleRTCDataChannels ' + peer_id, event);
         event.channel.onmessage = (msg) => {
@@ -2613,6 +2678,7 @@ async function handleRTCDataChannels(peer_id) {
  * @returns arrayBuffer
  */
 function blobToArrayBuffer(blob) {
+    console.log('Function called: blobToArrayBuffer');
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => {
@@ -2632,6 +2698,7 @@ function blobToArrayBuffer(blob) {
  * @param {string} peer_id socket.id
  */
 async function handleRtcOffer(peer_id) {
+    console.log('Function called: handleRtcOffer');
     const pc = peerConnections[peer_id];
     // https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/onnegotiationneeded
     pc.onnegotiationneeded = () => {
@@ -2666,6 +2733,7 @@ async function handleRtcOffer(peer_id) {
  * @param {object} config data
  */
 function handleSessionDescription(config) {
+    console.log('Function called: handleSessionDescription');
     console.log('Remote Session Description', config);
     const { peer_id, session_description } = config;
 
@@ -2676,7 +2744,8 @@ function handleSessionDescription(config) {
 
     // https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/setRemoteDescription
     pc.setRemoteDescription(remote_description)
-        .then(() => {
+        .then(()  => {
+    console.log('Function called: pc');
             console.log('setRemoteDescription done!');
             if (session_description.type == 'offer') {
                 console.log('Creating answer');
@@ -2723,6 +2792,7 @@ function handleSessionDescription(config) {
  * @param {object} config data
  */
 function handleIceCandidate(config) {
+    console.log('Function called: handleIceCandidate');
     const { peer_id, ice_candidate } = config;
     // https://developer.mozilla.org/en-US/docs/Web/API/RTCIceCandidate
     peerConnections[peer_id].addIceCandidate(new RTCIceCandidate(ice_candidate)).catch((err) => {
@@ -2736,6 +2806,7 @@ function handleIceCandidate(config) {
  * @param {object} reason of disconnection
  */
 function handleDisconnect(reason) {
+    console.log('Function called: handleDisconnect');
     console.log('Disconnected from signaling server', { reason: reason });
 
     checkRecording();
@@ -2786,6 +2857,7 @@ function handleDisconnect(reason) {
  * @param {object} config data
  */
 function handleRemovePeer(config) {
+    console.log('Function called: handleRemovePeer');
     console.log('Signaling server said to remove peer:', config);
 
     const { peer_id } = config;
@@ -2833,6 +2905,7 @@ function handleRemovePeer(config) {
  * Set custom theme
  */
 function setCustomTheme() {
+    console.log('Function called: setCustomTheme');
     const color = themeCustom.color;
     swBg = `radial-gradient(${color}, ${color})`;
     setSP('--body-bg', `radial-gradient(${color}, ${color})`);
@@ -2857,6 +2930,7 @@ function setCustomTheme() {
  * Set mirotalk theme | dark | grey | ...
  */
 function setTheme() {
+    console.log('Function called: setTheme');
     if (themeCustom.keep) return setCustomTheme();
 
     mirotalkTheme.selectedIndex = lsSettings.theme;
@@ -3050,6 +3124,7 @@ function setTheme() {
  * @param {string} position vertical / horizontal
  */
 function setButtonsBarPosition(position) {
+    console.log('Function called: setButtonsBarPosition');
     if (!position || isMobileDevice) return;
 
     mainButtonsBarPosition = position;
@@ -3099,6 +3174,7 @@ function setButtonsBarPosition(position) {
  * Init to enumerate the devices
  */
 async function initEnumerateDevices() {
+    console.log('Function called: initEnumerateDevices');
     console.log('05. init Enumerate Video and Audio Devices');
     await initEnumerateVideoDevices();
     await initEnumerateAudioDevices();
@@ -3109,6 +3185,7 @@ async function initEnumerateDevices() {
  * @returns boolean true/false
  */
 async function initEnumerateAudioDevices() {
+    console.log('Function called: initEnumerateAudioDevices');
     if (isEnumerateAudioDevices) return;
     // allow the audio
     await navigator.mediaDevices
@@ -3127,6 +3204,7 @@ async function initEnumerateAudioDevices() {
  * @returns boolean true/false
  */
 async function initEnumerateVideoDevices() {
+    console.log('Function called: initEnumerateVideoDevices');
     if (isEnumerateVideoDevices) return;
     // allow the video
     await navigator.mediaDevices
@@ -3145,6 +3223,7 @@ async function initEnumerateVideoDevices() {
  * @param {object} stream
  */
 async function enumerateAudioDevices(stream) {
+    console.log('Function called: enumerateAudioDevices');
     console.log('06. Get Audio Devices');
     await navigator.mediaDevices
         .enumerateDevices()
@@ -3185,6 +3264,7 @@ async function enumerateAudioDevices(stream) {
  * @param {object} stream
  */
 async function enumerateVideoDevices(stream) {
+    console.log('Function called: enumerateVideoDevices');
     console.log('07. Get Video Devices');
     await navigator.mediaDevices
         .enumerateDevices()
@@ -3212,6 +3292,7 @@ async function enumerateVideoDevices(stream) {
  * @param {object} stream
  */
 async function stopTracks(stream) {
+    console.log('Function called: stopTracks');
     stream.getTracks().forEach((track) => {
         track.stop();
     });
@@ -3223,6 +3304,7 @@ async function stopTracks(stream) {
  * @param {object} els
  */
 async function addChild(device, els) {
+    console.log('Function called: addChild');
     const { kind, deviceId, label } = device;
     els.forEach((el) => {
         const option = document.createElement('option');
@@ -3249,6 +3331,7 @@ async function addChild(device, els) {
  * @param {boolean} init indicates if it's during inizialization before join room
  */
 function detectBluetoothHeadset(init = false) {
+    console.log('Function called: detectBluetoothHeadset');
     const selectEl = init ? initMicrophoneSelect : audioInputSelect;
     if (!selectEl) return;
 
@@ -3269,6 +3352,7 @@ function detectBluetoothHeadset(init = false) {
  * @returns string
  */
 function getSelectedOptionText(selectEl) {
+    console.log('Function called: getSelectedOptionText');
     if (!selectEl || !selectEl.options || selectEl.selectedIndex < 0) return '';
     const opt = selectEl.options[selectEl.selectedIndex];
     return opt && opt.text ? opt.text.trim() : '';
@@ -3280,6 +3364,7 @@ function getSelectedOptionText(selectEl) {
  * https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
  */
 async function setupLocalVideoMedia() {
+    console.log('Function called: setupLocalVideoMedia');
     if (!useVideo || localVideoMediaStream) {
         return;
     }
@@ -3308,6 +3393,7 @@ async function setupLocalVideoMedia() {
      * @param {MediaStream} stream
      */
     async function updateLocalVideoMediaStream(stream) {
+    console.log('Function called: updateLocalVideoMediaStream');
         if (stream) {
             localVideoMediaStream = stream;
             await loadLocalMedia(stream, 'video');
@@ -3322,6 +3408,7 @@ async function setupLocalVideoMedia() {
  * https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
  */
 async function setupLocalAudioMedia() {
+    console.log('Function called: setupLocalAudioMedia');
     if (!useAudio || localAudioMediaStream) {
         return;
     }
@@ -3352,6 +3439,7 @@ async function setupLocalAudioMedia() {
  * @param {object} err - The error object
  */
 function handleMediaError(mediaType, err) {
+    console.log('Function called: handleMediaError');
     playSound('alert');
     //
     let errMessage = err;
@@ -3406,6 +3494,7 @@ function handleMediaError(mediaType, err) {
  * @param {object} stream media stream audio - video
  */
 async function loadLocalMedia(stream, kind) {
+    console.log('Function called: loadLocalMedia');
     if (stream) console.log('LOAD LOCAL MEDIA STREAM TRACKS', stream.getTracks());
 
     switch (kind) {
@@ -3784,6 +3873,7 @@ async function loadLocalMedia(stream, kind) {
  * Check if screen is shared on join room
  */
 function checkShareScreen() {
+    console.log('Function called: checkShareScreen');
     if (!isMobileDevice && isScreenEnabled && isScreenSharingSupported) {
         playSound('newMessage');
         // screenShareBtn.click(); // Chrome - Opera - Edge - Brave
@@ -3810,6 +3900,7 @@ function checkShareScreen() {
  * Open chat on Join
  */
 function checkChatOnJoin() {
+    console.log('Function called: checkChatOnJoin');
     if (chat) {
         chatRoomBtn.click();
     }
@@ -3822,6 +3913,7 @@ function checkChatOnJoin() {
  * @param {string} peer_id socket.id
  */
 async function loadRemoteMediaStream(stream, peers, peer_id, kind) {
+    console.log('Function called: loadRemoteMediaStream');
     // get data from peers obj
     console.log('REMOTE PEER INFO', peers[peer_id]);
 
@@ -4154,6 +4246,7 @@ async function loadRemoteMediaStream(stream, peers, peer_id, kind) {
             }
 
             function videoIsOff() {
+    console.log('Function called: videoIsOff');
                 displayElements([
                     { element: remoteMedia, display: false },
                     { element: remoteVideoAvatarImage, display: true, mode: 'block' },
@@ -4364,9 +4457,11 @@ async function loadRemoteMediaStream(stream, peers, peer_id, kind) {
  * @param {string} peer_name
  */
 function handleAudioFallback(audioMedia, peer_name) {
+    console.log('Function called: handleAudioFallback');
     if (!audioMedia) return;
     // Fallback: play audio on first user interaction
     const playOnInteraction = () => {
+    console.log('Function called: playOnInteraction');
         audioMedia
             .play()
             .then(() => {
@@ -4388,6 +4483,7 @@ function handleAudioFallback(audioMedia, peer_name) {
  * @param {object} stream media stream audio - video
  */
 function logStreamSettingsInfo(name, stream) {
+    console.log('Function called: logStreamSettingsInfo');
     if ((useVideo || isScreenStreaming) && hasVideoTrack(stream)) {
         const videoTrack = getVideoTrack(stream);
         if (videoTrack) {
@@ -4418,6 +4514,7 @@ function logStreamSettingsInfo(name, stream) {
  *    0      1       2      3      4
  */
 function adaptAspectRatio() {
+    console.log('Function called: adaptAspectRatio');
     const participantsCount = videoMediaContainer.childElementCount;
     if (peersCount) peersCount.innerText = participantsCount;
     let desktop,
@@ -4483,10 +4580,12 @@ function adaptAspectRatio() {
  * @returns object image
  */
 function genGravatar(email, size = false) {
+    console.log('Function called: genGravatar');
     const hash = md5(email.toLowerCase().trim());
     const gravatarURL = `https://www.gravatar.com/avatar/${hash}` + (size ? `?s=${size}` : '?s=250');
     return gravatarURL;
     function md5(input) {
+    console.log('Function called: md5');
         return CryptoJS.MD5(input).toString();
     }
 }
@@ -4497,6 +4596,7 @@ function genGravatar(email, size = false) {
  * @returns boolean
  */
 function isValidEmail(email) {
+    console.log('Function called: isValidEmail');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
@@ -4509,6 +4609,7 @@ function isValidEmail(email) {
  * @param {integer} avatarImgSize width and height in px
  */
 function genAvatarSvg(peerName, avatarImgSize) {
+    console.log('Function called: genAvatarSvg');
     const charCodeRed = peerName.charCodeAt(0);
     const charCodeGreen = peerName.charCodeAt(1) || charCodeRed;
     const red = Math.pow(charCodeRed, 7) % 200;
@@ -4555,6 +4656,7 @@ function genAvatarSvg(peerName, avatarImgSize) {
  * @param {string} peerAvatar
  */
 function setPeerAvatarImgName(videoAvatarImageId, peerName, peerAvatar) {
+    console.log('Function called: setPeerAvatarImgName');
     const videoAvatarImageElement = getId(videoAvatarImageId);
     videoAvatarImageElement.style.pointerEvents = 'none';
 
@@ -4581,6 +4683,7 @@ function setPeerAvatarImgName(videoAvatarImageId, peerName, peerAvatar) {
  * @param {string} peerAvatar me or peer avatar
  */
 function setPeerChatAvatarImgName(avatar, peerName, peerAvatar) {
+    console.log('Function called: setPeerChatAvatarImgName');
     const avatarImg =
         peerAvatar && isImageURL(peerAvatar)
             ? peerAvatar
@@ -4608,11 +4711,13 @@ function setPeerChatAvatarImgName(avatar, peerName, peerAvatar) {
  * @param {string} videoToggleMirrorBtnId
  */
 function handleVideoToggleMirror(videoId, videoToggleMirrorBtnId) {
+    console.log('Function called: handleVideoToggleMirror');
     const videoPlayer = getId(videoId);
     const videoToggleMirrorBtn = getId(videoToggleMirrorBtnId);
     if (videoPlayer && videoToggleMirrorBtn) {
         // Toggle video mirror
-        videoToggleMirrorBtn.addEventListener('click', (e) => {
+        videoToggleMirrorBtn.addEventListener('click', (e)  => {
+    console.log('Function called: videoToggleMirrorBtn');
             videoPlayer.classList.toggle('mirror');
         });
     }
@@ -4627,11 +4732,13 @@ function handleVideoToggleMirror(videoId, videoToggleMirrorBtnId) {
  * @param {string} peer_id socket.id
  */
 function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
+    console.log('Function called: handleVideoPlayerFs');
     const videoPlayer = getId(videoId);
     const videoFullScreenBtn = getId(videoFullScreenBtnId);
 
     // handle Chrome Firefox Opera Microsoft Edge videoPlayer ESC
-    videoPlayer.addEventListener('fullscreenchange', (e) => {
+    videoPlayer.addEventListener('fullscreenchange', (e)  => {
+    console.log('Function called: videoFullScreenBtn');
         // if Controls enabled, or document on FS do nothing
         if (videoPlayer.controls || isDocumentOnFullScreen) return;
         const fullscreenElement = document.fullscreenElement;
@@ -4677,6 +4784,7 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
     });
 
     function gotoFS() {
+    console.log('Function called: gotoFS');
         // handle remote peer video fs
         if (peer_id !== null) {
             const remoteVideoStatusBtn = getId(peer_id + '_videoStatus');
@@ -4696,10 +4804,12 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
     }
 
     function showMsg() {
+    console.log('Function called: showMsg');
         userLog('toast', 'Full screen mode work when video is on');
     }
 
     function handleFSVideo() {
+    console.log('Function called: handleFSVideo');
         // if Controls enabled, or document on FS do nothing
         if (videoPlayer.controls || isDocumentOnFullScreen) return;
 
@@ -4742,6 +4852,7 @@ function handleVideoPlayerFs(videoId, videoFullScreenBtnId, peer_id = null) {
  * @param {boolean} itsMe true/false
  */
 function handleFileDragAndDrop(elemId, peer_id, itsMe = false) {
+    console.log('Function called: handleFileDragAndDrop');
     const videoPeer = getId(elemId);
 
     videoPeer.addEventListener('dragover', function (e) {
@@ -4793,10 +4904,12 @@ function handleFileDragAndDrop(elemId, peer_id, itsMe = false) {
  * @param {boolean} privacyBtnId
  */
 function handleVideoPrivacyBtn(videoId, privacyBtnId) {
+    console.log('Function called: handleVideoPrivacyBtn');
     const video = getId(videoId);
     const privacyBtn = getId(privacyBtnId);
     if (useVideo && video && privacyBtn) {
-        privacyBtn.addEventListener('click', () => {
+        privacyBtn.addEventListener('click', ()  => {
+    console.log('Function called: privacyBtn');
             playSound('click');
             isVideoPrivacyActive = !isVideoPrivacyActive;
             setVideoPrivacyStatus(videoId, isVideoPrivacyActive);
@@ -4813,6 +4926,7 @@ function handleVideoPrivacyBtn(videoId, privacyBtnId) {
  * @param {boolean} peerPrivacyActive
  */
 function setVideoPrivacyStatus(peerVideoId, peerPrivacyActive) {
+    console.log('Function called: setVideoPrivacyStatus');
     const video = getId(peerVideoId);
     if (!video) return;
     if (peerPrivacyActive) {
@@ -4835,11 +4949,13 @@ function setVideoPrivacyStatus(peerVideoId, peerPrivacyActive) {
  * @param {boolean} isScreen stream
  */
 function handleVideoPinUnpin(elemId, pnId, camId, peerId, isScreen = false) {
+    console.log('Function called: handleVideoPinUnpin');
     const videoPlayer = getId(elemId);
     const btnPn = getId(pnId);
     const cam = getId(camId);
     if (btnPn && videoPlayer && cam) {
-        btnPn.addEventListener('click', () => {
+        btnPn.addEventListener('click', ()  => {
+    console.log('Function called: cam');
             if (isMobileDevice) return;
             playSound('click');
             isVideoPinned = !isVideoPinned;
@@ -4876,6 +4992,7 @@ function handleVideoPinUnpin(elemId, pnId, camId, peerId, isScreen = false) {
 }
 
 function toggleVideoPin(position) {
+    console.log('Function called: toggleVideoPin');
     if (!isVideoPinned) return;
     switch (position) {
         case 'top':
@@ -4919,6 +5036,7 @@ function toggleVideoPin(position) {
  * @param {object} remoteMedia videoMedia
  */
 function handleVideoFocusMode(remoteVideoFocusBtn, remoteVideoWrap, remoteMedia) {
+    console.log('Function called: handleVideoFocusMode');
     if (remoteVideoFocusBtn) {
         remoteVideoFocusBtn.addEventListener('click', (e) => {
             if (isHideMeActive) {
@@ -4952,6 +5070,7 @@ function handleVideoFocusMode(remoteVideoFocusBtn, remoteVideoWrap, remoteMedia)
  * @param {string} peerId
  */
 function handleVideoZoomInOut(statusId, videoWrapId, zoomInBtnId, zoomOutBtnId, mediaId, peerId = null) {
+    console.log('Function called: handleVideoZoomInOut');
     const id = statusId;
     const videoWrap = getId(videoWrapId);
     const zoomIn = getId(zoomInBtnId);
@@ -4976,12 +5095,14 @@ function handleVideoZoomInOut(statusId, videoWrapId, zoomInBtnId, zoomOutBtnId, 
     let zoom = 1;
 
     function setTransform() {
+    console.log('Function called: setTransform');
         if (isVideoOf(id) || isVideoPrivacyMode(video)) return;
         zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, zoom));
         video.style.scale = zoom;
     }
 
     function resetZoom(video) {
+    console.log('Function called: resetZoom');
         zoom = 1;
         video.style.transform = '';
         video.style.transformOrigin = 'center';
@@ -5047,10 +5168,12 @@ function handleVideoZoomInOut(statusId, videoWrapId, zoomInBtnId, zoomOutBtnId, 
     }
 
     function isVideoOf(id) {
+    console.log('Function called: isVideoOf');
         const videoStatusBtn = getId(id);
         return videoStatusBtn && videoStatusBtn.className === className.videoOff;
     }
     function isVideoPrivacyMode() {
+    console.log('Function called: isVideoPrivacyMode');
         return video && video.classList.contains('videoCircle');
     }
 }
@@ -5063,11 +5186,13 @@ function handleVideoZoomInOut(statusId, videoWrapId, zoomInBtnId, zoomOutBtnId, 
  * @param {string} peerId
  */
 function handlePictureInPicture(btnId, videoId, peerId) {
+    console.log('Function called: handlePictureInPicture');
     const btnPiP = getId(btnId);
     const video = getId(videoId);
     const myVideoStatus = getId('myVideoStatusIcon');
     const remoteVideoStatus = getId(peerId + '_videoStatus');
-    btnPiP.addEventListener('click', () => {
+    btnPiP.addEventListener('click', ()  => {
+    console.log('Function called: remoteVideoStatus');
         if (video.pictureInPictureElement) {
             video.exitPictureInPicture();
         } else if (document.pictureInPictureEnabled) {
@@ -5104,6 +5229,7 @@ function handlePictureInPicture(btnId, videoId, peerId) {
  * @param {boolean} force_remove force to remove
  */
 function removeVideoPinMediaContainer(peer_id, force_remove = false) {
+    console.log('Function called: removeVideoPinMediaContainer');
     //alert(pinnedVideoPlayerId + '==' + peer_id);
     if (
         (isVideoPinned &&
@@ -5130,6 +5256,7 @@ function removeVideoPinMediaContainer(peer_id, force_remove = false) {
  * Pin videoMediaContainer
  */
 function videoMediaContainerPin() {
+    console.log('Function called: videoMediaContainerPin');
     if (!isVideoPinned) {
         videoMediaContainer.style.top = 0;
         videoMediaContainer.style.width = '75%';
@@ -5141,6 +5268,7 @@ function videoMediaContainerPin() {
  * Unpin videoMediaContainer
  */
 function videoMediaContainerUnpin() {
+    console.log('Function called: videoMediaContainerUnpin');
     if (!isVideoPinned) {
         videoMediaContainer.style.top = 0;
         videoMediaContainer.style.right = null;
@@ -5156,9 +5284,11 @@ function videoMediaContainerUnpin() {
  * @param {string} peer_id socket.id
  */
 function handleVideoToImg(videoStream, videoToImgBtn, peer_id = null) {
+    console.log('Function called: handleVideoToImg');
     const videoTIBtn = getId(videoToImgBtn);
     const video = getId(videoStream);
-    videoTIBtn.addEventListener('click', () => {
+    videoTIBtn.addEventListener('click', ()  => {
+    console.log('Function called: video');
         if (video.classList.contains('videoCircle')) {
             return userLog('toast', 'Snapshot not allowed if video on privacy mode');
         }
@@ -5183,6 +5313,7 @@ function handleVideoToImg(videoStream, videoToImgBtn, peer_id = null) {
  * @param {object} video element from where to take the snapshot
  */
 function takeSnapshot(video) {
+    console.log('Function called: takeSnapshot');
     playSound('snapshot');
     let context, canvas, width, height, dataURL;
     width = video.videoWidth;
@@ -5201,9 +5332,11 @@ function takeSnapshot(video) {
  * Start session time
  */
 function startSessionTime() {
+    console.log('Function called: startSessionTime');
     callElapsedTime = 0;
     elemDisplay(mySessionTime, true);
     setInterval(function printTime() {
+    console.log('Function called: printTime');
         callElapsedTime++;
         mySessionTime.innerText = secondsToHms(callElapsedTime);
     }, 1000);
@@ -5214,6 +5347,7 @@ function startSessionTime() {
  * @param {MediaStream} localVideoMediaStream
  */
 function refreshMyVideoStatus(localVideoMediaStream) {
+    console.log('Function called: refreshMyVideoStatus');
     if (!localVideoMediaStream) return;
     // check Track video status
     localVideoMediaStream.getTracks().forEach((track) => {
@@ -5228,6 +5362,7 @@ function refreshMyVideoStatus(localVideoMediaStream) {
  * @param {MediaStream} localAudioMediaStream
  */
 function refreshMyAudioStatus(localAudioMediaStream) {
+    console.log('Function called: refreshMyAudioStatus');
     if (!localAudioMediaStream) return;
     // check Track audio status
     localAudioMediaStream.getTracks().forEach((track) => {
@@ -5241,8 +5376,9 @@ function refreshMyAudioStatus(localAudioMediaStream) {
  * Handle WebRTC left buttons
  */
 function manageButtons() {
+    console.log('Function called: manageButtons');
     // Buttons bar
-    // setShareRoomBtn();
+    setShareRoomBtn();
     setRecordStreamBtn();
     setScreenShareBtn();
     setFullScreenBtn();
@@ -5272,6 +5408,7 @@ function manageButtons() {
  * Copy - share room url button click event
  */
 function setShareRoomBtn() {
+    console.log('Function called: setShareRoomBtn');
     shareRoomBtn.addEventListener('click', async (e) => {
         shareRoomUrl();
     });
@@ -5289,6 +5426,7 @@ function setShareRoomBtn() {
  * Hide myself from room view
  */
 function setHideMeButton() {
+    console.log('Function called: setHideMeButton');
     hideMeBtn.addEventListener('click', (e) => {
         if (isHideALLVideosActive) {
             return userLog('toast', 'To use this feature, please toggle video focus mode', 'top-end', 6000);
@@ -5302,6 +5440,7 @@ function setHideMeButton() {
  * Toggle extra buttons
  */
 function setToggleExtraButtons() {
+    console.log('Function called: setToggleExtraButtons');
     toggleExtraBtn.addEventListener('click', () => {
         toggleExtraButtons();
         if (!isMobileDevice) {
@@ -5323,6 +5462,7 @@ function setToggleExtraButtons() {
  * Toggle extra buttons
  */
 function toggleExtraButtons() {
+    console.log('Function called: toggleExtraButtons');
     const isButtonsBarHidden = buttonsBar.style.display === 'none' || buttonsBar.style.display === '';
     const displayValue = isButtonsBarHidden ? 'flex' : 'none';
     const cName = isButtonsBarHidden ? className.up : className.down;
@@ -5335,6 +5475,7 @@ function toggleExtraButtons() {
  * Audio mute - unmute button click event
  */
 function setAudioBtn() {
+    console.log('Function called: setAudioBtn');
     audioBtn.addEventListener('click', (e) => {
         handleAudio(e, false);
     });
@@ -5363,6 +5504,7 @@ function setAudioBtn() {
  * Video hide - show button click event
  */
 function setVideoBtn() {
+    console.log('Function called: setVideoBtn');
     videoBtn.addEventListener('click', async (e) => {
         await handleVideo(e, false);
     });
@@ -5372,6 +5514,7 @@ function setVideoBtn() {
  * Check if can swap or not the cam, if yes show the button else hide it
  */
 function setSwapCameraBtn() {
+    console.log('Function called: setSwapCameraBtn');
     navigator.mediaDevices.enumerateDevices().then((devices) => {
         const videoInput = devices.filter((device) => device.kind === 'videoinput');
         if (videoInput.length > 1 && isMobileDevice) {
@@ -5388,6 +5531,7 @@ function setSwapCameraBtn() {
  * Check if i can share the screen, if yes show button else hide it
  */
 function setScreenShareBtn() {
+    console.log('Function called: setScreenShareBtn');
     if (
         !isMobileDevice &&
         (navigator.getDisplayMedia || navigator.mediaDevices.getDisplayMedia) &&
@@ -5413,6 +5557,7 @@ function setScreenShareBtn() {
  * Start - Stop Stream recording
  */
 function setRecordStreamBtn() {
+    console.log('Function called: setRecordStreamBtn');
     recordStreamBtn.addEventListener('click', (e) => {
         if (isStreamRecording) {
             stopStreamRecording();
@@ -5429,8 +5574,8 @@ function setRecordStreamBtn() {
  * Full screen button click event
  */
 function setFullScreenBtn() {
-    const fsSupported =
-        buttons.main.showFullScreenBtn &&
+    console.log('Function called: setFullScreenBtn');
+    const fsSupported = buttons.main.showFullScreenBtn &&
         (document.fullscreenEnabled ||
             document.webkitFullscreenEnabled ||
             document.mozFullScreenEnabled ||
@@ -5438,7 +5583,8 @@ function setFullScreenBtn() {
 
     if (fsSupported) {
         // detect esc from full screen mode
-        document.addEventListener('fullscreenchange', (e) => {
+        document.addEventListener('fullscreenchange', (e)  => {
+    console.log('Function called: fsSupported');
             let fullscreenElement = document.fullscreenElement;
             if (!fullscreenElement) {
                 fullScreenBtn.className = className.fsOff;
@@ -5458,6 +5604,7 @@ function setFullScreenBtn() {
  * Chat room buttons click event
  */
 function setChatRoomBtn() {
+    console.log('Function called: setChatRoomBtn');
     // adapt chat room size for mobile
     setChatRoomAndCaptionForMobile();
 
@@ -5640,6 +5787,7 @@ function setChatRoomBtn() {
  * Caption room buttons click event
  */
 function setCaptionRoomBtn() {
+    console.log('Function called: setCaptionRoomBtn');
     if (buttons.main.showCaptionRoomBtn) {
         // open hide caption
         captionBtn.addEventListener('click', (e) => {
@@ -5723,6 +5871,7 @@ function setCaptionRoomBtn() {
  * Set room emoji reaction button
  */
 function setRoomEmojiButton() {
+    console.log('Function called: setRoomEmojiButton');
     // Map sound emojis to their shortcodes for sound playback
     const soundEmojis = [
         { emoji: '👍', shortcodes: ':+1:' },
@@ -5791,9 +5940,11 @@ function setRoomEmojiButton() {
 
     // Set grid layout only when visible
     function showEmojiGrid() {
+    console.log('Function called: showEmojiGrid');
         emojiGrid.classList.add('visible');
     }
     function hideEmojiGrid() {
+    console.log('Function called: hideEmojiGrid');
         emojiGrid.classList.remove('visible');
     }
 
@@ -5839,6 +5990,7 @@ function setRoomEmojiButton() {
     });
 
     function sendEmojiToRoom(data) {
+    console.log('Function called: sendEmojiToRoom');
         const message = {
             type: 'roomEmoji',
             room_id: roomId,
@@ -5853,6 +6005,7 @@ function setRoomEmojiButton() {
     }
 
     function toggleEmojiPicker() {
+    console.log('Function called: toggleEmojiPicker');
         if (emojiPickerContainer.style.display === 'block') {
             elemDisplay(emojiPickerContainer, false);
             setColor(roomEmojiPickerBtn, 'var(--btn-bar-bg-color)');
@@ -5867,6 +6020,7 @@ function setRoomEmojiButton() {
  * Emoji picker chat room button click event
  */
 function setChatEmojiBtn() {
+    console.log('Function called: setChatEmojiBtn');
     msgerEmojiBtn.addEventListener('click', (e) => {
         // prevent refresh page
         e.preventDefault();
@@ -5880,7 +6034,8 @@ function setChatEmojiBtn() {
     const emojiPicker = new EmojiMart.Picker(pickerOptions);
     msgerEmojiPicker.appendChild(emojiPicker);
 
-    handleClickOutside(emojiPicker, msgerEmojiBtn, () => {
+    handleClickOutside(emojiPicker, msgerEmojiBtn, ()  => {
+    console.log('Function called: emojiPicker');
         if (isChatEmojiVisible) {
             elemDisplay(msgerEmojiPicker, false);
             setColor(msgerEmojiBtn, '#FFFFFF');
@@ -5893,6 +6048,7 @@ function setChatEmojiBtn() {
  * Add emoji to chat message
  */
 function addEmojiToMsg(data) {
+    console.log('Function called: addEmojiToMsg');
     //console.log(data);
     msgerInput.value += data.native;
     hideShowEmojiPicker();
@@ -5902,6 +6058,7 @@ function addEmojiToMsg(data) {
  * Set my hand button click event
  */
 function setMyHandBtn() {
+    console.log('Function called: setMyHandBtn');
     myHandBtn.addEventListener('click', async (e) => {
         setMyHandStatus();
     });
@@ -5911,6 +6068,7 @@ function setMyHandBtn() {
  * Whiteboard: https://github.com/fabricjs/fabric.js
  */
 function setMyWhiteboardBtn() {
+    console.log('Function called: setMyWhiteboardBtn');
     dragElement(whiteboard, whiteboardHeader);
 
     setupWhiteboard();
@@ -6002,6 +6160,7 @@ function setMyWhiteboardBtn() {
  * Text Editor
  */
 function setTextEditorBtn() {
+    console.log('Function called: setTextEditorBtn');
     // make draggable
     dragElement(textEditor, textEditorHeader);
 
@@ -6030,6 +6189,7 @@ function setTextEditorBtn() {
  * Handle Text Editor toggle
  */
 function handleTextEditorToggle() {
+    console.log('Function called: handleTextEditorToggle');
     // if whiteboard is open, close it
     if (wbIsOpen) handleWhiteboardToggle();
     
@@ -6041,6 +6201,7 @@ function handleTextEditorToggle() {
  * Toggle Text Editor
  */
 function toggleTextEditor() {
+    console.log('Function called: toggleTextEditor');
     if (!isTextEditorOpen) {
         playSound('newMessage');
         setTippy(textEditorBtn, 'Close the Text Editor', placement);
@@ -6059,6 +6220,7 @@ function toggleTextEditor() {
  * @returns {object} data
  */
 function getTextEditorAction(action) {
+    console.log('Function called: getTextEditorAction');
     return {
         room_id: roomId,
         peer_name: myPeerName,
@@ -6071,6 +6233,7 @@ function getTextEditorAction(action) {
  * @param {object} config data
  */
 function textEditorAction(config) {
+    console.log('Function called: textEditorAction');
     if (thereArePeerConnections()) {
         sendToServer('textEditorAction', config);
     }
@@ -6083,6 +6246,7 @@ function textEditorAction(config) {
  * @param {boolean} logMe popup action
  */
 function handleTextEditorAction(config, logMe = true) {
+    console.log('Function called: handleTextEditorAction');
     const { peer_name, action } = config;
 
     if (logMe) {
@@ -6101,6 +6265,7 @@ function handleTextEditorAction(config, logMe = true) {
  * File Transfer button click event
  */
 function setMyFileShareBtn() {
+    console.log('Function called: setMyFileShareBtn');
     // make send-receive file div draggable
     if (!isMobileDevice) {
         dragElement(sendFileDiv, imgShareSend);
@@ -6126,6 +6291,7 @@ function setMyFileShareBtn() {
  * Set snapshot room button click event
  */
 function setSnapshotRoomBtn() {
+    console.log('Function called: setSnapshotRoomBtn');
     snapshotRoomBtn.addEventListener('click', async (e) => {
         await snapshotRoom();
     });
@@ -6135,6 +6301,7 @@ function setSnapshotRoomBtn() {
  * Snapshot Screen, Window or Tab
  */
 async function snapshotRoom() {
+    console.log('Function called: snapshotRoom');
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     const video = document.createElement('video');
@@ -6184,6 +6351,7 @@ async function snapshotRoom() {
  * Document Picture-in-Picture button click event
  */
 function setDocumentPiPBtn() {
+    console.log('Function called: setDocumentPiPBtn');
     documentPiPBtn.addEventListener('click', async () => {
         if (!showDocumentPipBtn) return;
         if (documentPictureInPicture.window) {
@@ -6200,6 +6368,7 @@ function setDocumentPiPBtn() {
  * @returns void
  */
 async function documentPictureInPictureRestart() {
+    console.log('Function called: documentPictureInPictureRestart');
     if (!showDocumentPipBtn || !documentPictureInPicture.window) return;
     documentPictureInPictureClose();
     setTimeout(async () => {
@@ -6211,6 +6380,7 @@ async function documentPictureInPictureRestart() {
  *  Close documentPictureInPicture
  */
 async function documentPictureInPictureClose() {
+    console.log('Function called: documentPictureInPictureClose');
     if (!showDocumentPipBtn) return;
     if (documentPictureInPicture.window) {
         documentPictureInPicture.window.close();
@@ -6222,6 +6392,7 @@ async function documentPictureInPictureClose() {
  * Open documentPictureInPicture
  */
 async function documentPictureInPictureOpen() {
+    console.log('Function called: documentPictureInPictureOpen');
     if (!showDocumentPipBtn) return;
     try {
         const pipWindow = await documentPictureInPicture.requestWindow({
@@ -6230,6 +6401,7 @@ async function documentPictureInPictureOpen() {
         });
 
         function updateCustomProperties() {
+    console.log('Function called: updateCustomProperties');
             const documentStyle = getComputedStyle(document.documentElement);
 
             pipWindow.document.documentElement.style = `
@@ -6252,6 +6424,7 @@ async function documentPictureInPictureOpen() {
         pipWindow.document.body.append(pipVideoContainer);
 
         function cloneVideoElements() {
+    console.log('Function called: cloneVideoElements');
             let foundVideo = false;
 
             pipVideoContainer.innerHTML = '';
@@ -6291,7 +6464,9 @@ async function documentPictureInPictureOpen() {
                 pipVideoContainer.append(pipVideo);
 
                 function observeElementClassChanges(element, observerName) {
-                    const observer = new MutationObserver((mutations) => {
+    console.log('Function called: observeElementClassChanges');
+                    const observer = new MutationObserver((mutations)  => {
+    console.log('Function called: observer');
                         mutations.forEach((mutation) => {
                             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                                 console.log(
@@ -6327,7 +6502,8 @@ async function documentPictureInPictureOpen() {
             return userLog('toast', 'No video allowed for Document PIP');
         }
 
-        const videoObserver = new MutationObserver(() => {
+        const videoObserver = new MutationObserver(()  => {
+    console.log('Function called: videoObserver');
             cloneVideoElements();
         });
 
@@ -6335,7 +6511,8 @@ async function documentPictureInPictureOpen() {
             childList: true,
         });
 
-        const documentObserver = new MutationObserver(() => {
+        const documentObserver = new MutationObserver(()  => {
+    console.log('Function called: documentObserver');
             updateCustomProperties();
         });
 
@@ -6356,6 +6533,7 @@ async function documentPictureInPictureOpen() {
  * My settings button click event
  */
 function setMySettingsBtn() {
+    console.log('Function called: setMySettingsBtn');
     mySettingsBtn.addEventListener('click', (e) => {
         if (isMobileDevice) {
             elemDisplay(buttonsBar, false);
@@ -6367,54 +6545,64 @@ function setMySettingsBtn() {
     mySettingsCloseBtn.addEventListener('click', (e) => {
         hideShowMySettings();
     });
-    speakerTestBtn.addEventListener('click', (e) => {
-        playSound('ring', true);
-    });
+    if (speakerTestBtn) {
+        speakerTestBtn.addEventListener('click', (e) => {
+            playSound('ring', true);
+        });
+    }
     myPeerNameSetBtn.addEventListener('click', (e) => {
         updateMyPeerName();
     });
     // Sounds
-    switchSounds.addEventListener('change', (e) => {
-        notifyBySound = e.currentTarget.checked;
-        lsSettings.sounds = notifyBySound;
-        lS.setSettings(lsSettings);
-        userLog('toast', `${icons.sounds} Notify & sounds ` + (notifyBySound ? 'ON' : 'OFF'));
-        playSound('switch');
-    });
-    switchShare.addEventListener('change', (e) => {
-        notify = e.currentTarget.checked;
-        lsSettings.share_on_join = notify;
-        lS.setSettings(lsSettings);
-        userLog('toast', `${icons.share} Share room on join ` + (notify ? 'ON' : 'OFF'));
-        playSound('switch');
-    });
-    switchKeepButtonsVisible.addEventListener('change', (e) => {
-        isButtonsBarOver = isKeepButtonsVisible = e.currentTarget.checked;
-        lsSettings.keep_buttons_visible = isButtonsBarOver;
-        lS.setSettings(lsSettings);
-        const status = isButtonsBarOver ? 'enabled' : 'disabled';
-        userLog('toast', `Buttons always visible ${status}`);
-        playSound('switch');
-    });
+    if(switchSounds){
+        switchSounds.addEventListener('change', (e) => {
+            notifyBySound = e.currentTarget.checked;
+            lsSettings.sounds = notifyBySound;
+            lS.setSettings(lsSettings);
+            userLog('toast', `${icons.sounds} Notify & sounds ` + (notifyBySound ? 'ON' : 'OFF'));
+            playSound('switch');
+        });
+    }
+    if(switchShare){
+        switchShare.addEventListener('change', (e) => {
+            notify = e.currentTarget.checked;
+            lsSettings.share_on_join = notify;
+            lS.setSettings(lsSettings);
+            userLog('toast', `${icons.share} Share room on join ` + (notify ? 'ON' : 'OFF'));
+            playSound('switch');
+        });
+    }
+    if(switchKeepButtonsVisible){
+        switchKeepButtonsVisible.addEventListener('change', (e) => {
+            isButtonsBarOver = isKeepButtonsVisible = e.currentTarget.checked;
+            lsSettings.keep_buttons_visible = isButtonsBarOver;
+            lS.setSettings(lsSettings);
+            const status = isButtonsBarOver ? 'enabled' : 'disabled';
+            userLog('toast', `Buttons always visible ${status}`);
+            playSound('switch');
+        });
+    }
 
     if (isMobileDevice) {
         elemDisplay(pushToTalkDiv, false);
     } else {
         // Push to talk
-        switchPushToTalk.addEventListener('change', (e) => {
+        switchPushToTalk.addEventListener('change', (e)  => {
+    console.log('Function called: status');
             isPushToTalkActive = e.currentTarget.checked;
             userLog('toast', `👆 Push to talk ` + (isPushToTalkActive ? 'ON' : 'OFF'));
             playSound('switch');
         });
     }
-
-    switchAudioPitchBar.addEventListener('change', (e) => {
-        isAudioPitchBar = e.currentTarget.checked;
-        lsSettings.pitch_bar = isAudioPitchBar;
-        lS.setSettings(lsSettings);
-        userLog('toast', `${icons.pitchBar} Audio pitch bar ` + (isAudioPitchBar ? 'ON' : 'OFF'));
-        playSound('switch');
-    });
+    if(switchAudioPitchBar){
+        switchAudioPitchBar.addEventListener('change', (e) => {
+            isAudioPitchBar = e.currentTarget.checked;
+            lsSettings.pitch_bar = isAudioPitchBar;
+            lS.setSettings(lsSettings);
+            userLog('toast', `${icons.pitchBar} Audio pitch bar ` + (isAudioPitchBar ? 'ON' : 'OFF'));
+            playSound('switch');
+        });
+    }
 
     // make chat room draggable for desktop
     if (!isMobileDevice) dragElement(mySettings, mySettingsHeader);
@@ -6444,6 +6632,7 @@ function setMySettingsBtn() {
  * About button click event
  */
 function setAboutBtn() {
+    console.log('Function called: setAboutBtn');
     aboutBtn.addEventListener('click', (e) => {
         showAbout();
     });
@@ -6453,6 +6642,7 @@ function setAboutBtn() {
  * Leave room button click event
  */
 function setLeaveRoomBtn() {
+    console.log('Function called: setLeaveRoomBtn');
     leaveRoomBtn.addEventListener('click', (e) => {
         leaveRoom();
     });
@@ -6462,6 +6652,7 @@ function setLeaveRoomBtn() {
  * Handle left buttons - status menù show - hide on body mouse move
  */
 function handleBodyOnMouseMove() {
+    console.log('Function called: handleBodyOnMouseMove');
     document.body.addEventListener('mousemove', (e) => {
         showButtonsBarAndMenu();
     });
@@ -6488,6 +6679,7 @@ function handleBodyOnMouseMove() {
  * Setup local audio - video devices - theme ...
  */
 function setupMySettings() {
+    console.log('Function called: setupMySettings');
     // tab buttons
     tabRoomBtn.addEventListener('click', (e) => {
         openTab(e, 'tabRoom');
@@ -6523,9 +6715,9 @@ function setupMySettings() {
         openTab(e, 'tabLanguages');
     });
     // copy room URL
-    // myRoomId.addEventListener('click', () => {
-    //     isMobileDevice ? shareRoomUrl() : copyRoomURL();
-    // });
+    myRoomId.addEventListener('click', () => {
+        isMobileDevice ? shareRoomUrl() : copyRoomURL();
+    });
     // send invite by email to join room in a specified data-time
     roomSendEmailBtn.addEventListener('click', () => {
         shareRoomByEmail();
@@ -6661,6 +6853,7 @@ function setupMySettings() {
  * Handle keyboard shortcuts
  */
 function handleShortcuts() {
+    console.log('Function called: handleShortcuts');
     if (!isDesktopDevice || !buttons.settings.showShortcutsBtn) {
         elemDisplay(tabShortcutsBtn, false);
         setKeyboardShortcuts(false);
@@ -6671,7 +6864,8 @@ function handleShortcuts() {
             playSound('switch');
         });
 
-        document.addEventListener('keydown', (event) => {
+        document.addEventListener('keydown', (event)  => {
+    console.log('Function called: status');
             if (!isShortcutsEnabled || isChatRoomVisible || wbIsOpen) return;
 
             const notPresenter = isRulesActive && !isPresenter;
@@ -6797,6 +6991,7 @@ function handleShortcuts() {
  * @return {String} enabled/disabled
  */
 function setKeyboardShortcuts(enabled) {
+    console.log('Function called: setKeyboardShortcuts');
     isShortcutsEnabled = enabled;
     lsSettings.keyboard_shortcuts = isShortcutsEnabled;
     lS.setSettings(lsSettings);
@@ -6807,6 +7002,7 @@ function setKeyboardShortcuts(enabled) {
  * Load settings from local storage
  */
 function loadSettingsFromLocalStorage() {
+    console.log('Function called: loadSettingsFromLocalStorage');
     showChatOnMessage = lsSettings.show_chat_on_msg;
     speechInMessages = lsSettings.speech_in_msg;
     msgerShowChatOnMsg.checked = showChatOnMessage;
@@ -6848,6 +7044,7 @@ function loadSettingsFromLocalStorage() {
  * @returns any value
  */
 function getSelectedIndexValue(elem) {
+    console.log('Function called: getSelectedIndexValue');
     return elem.options[elem.selectedIndex].value;
 }
 
@@ -6855,6 +7052,7 @@ function getSelectedIndexValue(elem) {
  * Make video Url player draggable
  */
 function setupVideoUrlPlayer() {
+    console.log('Function called: setupVideoUrlPlayer');
     if (isMobileDevice) {
         // adapt video player iframe for mobile
         setSP('--iframe-width', '320px');
@@ -6879,6 +7077,7 @@ function setupVideoUrlPlayer() {
  * Handle Camera mirror logic
  */
 async function handleLocalCameraMirror() {
+    console.log('Function called: handleLocalCameraMirror');
     if (camera === 'environment') {
         // Back camera → No mirror
         initVideo.classList.remove('mirror');
@@ -6894,6 +7093,7 @@ async function handleLocalCameraMirror() {
  * Toggle username emoji
  */
 function toggleUsernameEmoji() {
+    console.log('Function called: toggleUsernameEmoji');
     usernameEmoji.classList.toggle('hidden');
 }
 
@@ -6901,6 +7101,7 @@ function toggleUsernameEmoji() {
  * Handle username emoji picker
  */
 function handleUsernameEmojiPicker() {
+    console.log('Function called: handleUsernameEmojiPicker');
     const pickerOptions = {
         theme: 'dark',
         onEmojiSelect: addEmojiToUsername,
@@ -6909,6 +7110,7 @@ function handleUsernameEmojiPicker() {
     usernameEmoji.appendChild(emojiUsernamePicker);
 
     function addEmojiToUsername(data) {
+    console.log('Function called: addEmojiToUsername');
         getId('usernameInput').value += data.native;
         toggleUsernameEmoji();
     }
@@ -6924,6 +7126,7 @@ function handleUsernameEmojiPicker() {
  * Toggle vide mirror
  */
 function toggleInitVideoMirror() {
+    console.log('Function called: toggleInitVideoMirror');
     initVideo.classList.toggle('mirror');
     // myVideo may not exist yet before joining/creating local tile
     if (typeof myVideo !== 'undefined' && myVideo) {
@@ -6936,6 +7139,7 @@ function toggleInitVideoMirror() {
  * @returns {object} audio - video constraints
  */
 function getAudioVideoConstraints() {
+    console.log('Function called: getAudioVideoConstraints');
     const audioSource = audioInputSelect.value;
     const videoSource = videoSelect.value;
     let videoConstraints = useVideo;
@@ -6960,10 +7164,12 @@ function getAudioVideoConstraints() {
  * @returns {object} video constraints
  */
 function getVideoConstraints(videoQuality) {
+    console.log('Function called: getVideoConstraints');
     const frameRate = videoMaxFrameRate;
 
     // Function to construct constraints with ideal or exact width/height
     function createConstraints(width, height, frameRate, isIdeal = false) {
+    console.log('Function called: createConstraints');
         const constraints = {
             width: isIdeal ? { ideal: width } : { exact: width },
             height: isIdeal ? { ideal: height } : { exact: height },
@@ -7021,6 +7227,7 @@ function getVideoConstraints(videoQuality) {
  * @returns {object} audio constraints
  */
 function getAudioConstraints(deviceId = null) {
+    console.log('Function called: getAudioConstraints');
     // Enhanced audio constraints for better quality and volume on all devices
     const audioConstraints = {
         echoCancellation: true, // Prevents echo/feedback
@@ -7046,6 +7253,7 @@ function getAudioConstraints(deviceId = null) {
  * @param {string} type camera/screen default camera
  */
 async function setLocalMaxFps(maxFrameRate, type = 'camera') {
+    console.log('Function called: setLocalMaxFps');
     if (!useVideo || isFirefox) return;
 
     const videoTrack = getVideoTrack(localVideoMediaStream);
@@ -7055,7 +7263,8 @@ async function setLocalMaxFps(maxFrameRate, type = 'camera') {
 
     (isScreenStreaming ? screenTrack : videoTrack)
         .applyConstraints({ frameRate: maxFrameRate })
-        .then(() => {
+        .then(()  => {
+    console.log('Function called: screenTrack');
             logStreamSettingsInfo('setLocalMaxFps', videoTrack ? localVideoMediaStream : localScreenMediaStream);
             type === 'camera'
                 ? (videoFpsSelectedIndex = videoFpsSelect.selectedIndex)
@@ -7074,6 +7283,7 @@ async function setLocalMaxFps(maxFrameRate, type = 'camera') {
  * Set local video quality: https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack/applyConstraints
  */
 async function setLocalVideoQuality() {
+    console.log('Function called: setLocalVideoQuality');
     const videoTrack = getVideoTrack(localVideoMediaStream);
     const screenTrack = getVideoTrack(localScreenMediaStream);
 
@@ -7084,7 +7294,8 @@ async function setLocalVideoQuality() {
 
     (isScreenStreaming ? screenTrack : videoTrack)
         .applyConstraints(videoConstraints)
-        .then(() => {
+        .then(()  => {
+    console.log('Function called: videoConstraints');
             logStreamSettingsInfo('setLocalVideoQuality', videoTrack ? localVideoMediaStream : localScreenMediaStream);
             videoQualitySelectedIndex = videoQualitySelect.selectedIndex;
         })
@@ -7099,6 +7310,7 @@ async function setLocalVideoQuality() {
  * Change audio output (Speaker)
  */
 async function changeAudioDestination(audioElement = false) {
+    console.log('Function called: changeAudioDestination');
     const audioDestination = audioOutputSelect.value;
     if (audioElement) {
         // change audio output to specified participant audio
@@ -7107,7 +7319,8 @@ async function changeAudioDestination(audioElement = false) {
         const audioElements = audioMediaContainer.querySelectorAll('audio');
         // change audio output for all participants audio
         const promises = [];
-        audioElements.forEach((audioElement) => {
+        audioElements.forEach((audioElement)  => {
+    console.log('Function called: promises');
             // discard my own audio on this device, so I won't hear myself.
             if (audioElement.id != 'myAudio') {
                 promises.push(attachSinkId(audioElement, audioDestination));
@@ -7124,6 +7337,7 @@ async function changeAudioDestination(audioElement = false) {
  * @param {string} sinkId uuid audio output device
  */
 async function attachSinkId(element, sinkId) {
+    console.log('Function called: attachSinkId');
     if (typeof element.sinkId === 'undefined') {
         console.warn('Browser does not support output device selection.');
         return;
@@ -7131,6 +7345,7 @@ async function attachSinkId(element, sinkId) {
 
     // Helper to actually set the sinkId and handle errors uniformly
     const doSetSinkId = async () => {
+    console.log('Function called: doSetSinkId');
         try {
             await element.setSinkId(sinkId);
             console.log(`Success, audio output device attached: ${sinkId}`);
@@ -7167,6 +7382,7 @@ async function attachSinkId(element, sinkId) {
 
         return new Promise((resolve) => {
             const applyOnGesture = async () => {
+    console.log('Function called: applyOnGesture');
                 try {
                     await doSetSinkId();
                     resolve(true);
@@ -7198,6 +7414,7 @@ async function attachSinkId(element, sinkId) {
  * @param {object} stream media stream audio - video
  */
 function attachMediaStream(element, stream) {
+    console.log('Function called: attachMediaStream');
     if (!element || !stream) return;
     //console.log("DEPRECATED, attachMediaStream will soon be removed.");
     element.srcObject = stream;
@@ -7212,6 +7429,7 @@ function attachMediaStream(element, stream) {
  * if mobile and mySettings open do nothing return
  */
 function showButtonsBarAndMenu() {
+    console.log('Function called: showButtonsBarAndMenu');
     if (
         isButtonsBarOver ||
         isButtonsVisible ||
@@ -7231,6 +7449,7 @@ function showButtonsBarAndMenu() {
  * Check every 10 sec if need to hide buttons bar and status menu
  */
 function checkButtonsBarAndMenu() {
+    console.log('Function called: checkButtonsBarAndMenu');
     if (lsSettings.keep_buttons_visible) {
         toggleClassElements('navbar', 'block');
         toggleExtraBtn.className = className.up;
@@ -7256,6 +7475,7 @@ function checkButtonsBarAndMenu() {
  * https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share
  */
 async function shareRoomUrl() {
+    console.log('Function called: shareRoomUrl');
     // navigator share
     if (navigator.share) {
         try {
@@ -7283,6 +7503,7 @@ async function shareRoomUrl() {
  * @param {boolean} checkScreen check screen share
  */
 function shareRoomMeetingURL(checkScreen = false) {
+    console.log('Function called: shareRoomMeetingURL');
     playSound('newMessage');
     const roomURL = getRoomURL();
     Swal.fire({
@@ -7323,6 +7544,7 @@ function shareRoomMeetingURL(checkScreen = false) {
  * https://github.com/neocotic/qrious
  */
 function makeRoomQR() {
+    console.log('Function called: makeRoomQR');
     const qr = new QRious({
         element: getId('qrRoom'),
         value: window.location.href,
@@ -7336,6 +7558,7 @@ function makeRoomQR() {
  * Make Room Popup QR
  */
 function makeRoomPopupQR() {
+    console.log('Function called: makeRoomPopupQR');
     const qr = new QRious({
         element: document.getElementById('qrRoomPopup'),
         value: window.location.href,
@@ -7349,6 +7572,7 @@ function makeRoomPopupQR() {
  * Copy Room URL to clipboard
  */
 function copyRoomURL() {
+    console.log('Function called: copyRoomURL');
     const roomURL = getRoomURL();
     const tmpInput = document.createElement('input');
     document.body.appendChild(tmpInput);
@@ -7365,6 +7589,7 @@ function copyRoomURL() {
  * Send the room ID via email at the scheduled date and time.
  */
 function shareRoomByEmail() {
+    console.log('Function called: shareRoomByEmail');
     Swal.fire({
         allowOutsideClick: false,
         allowEscapeKey: false,
@@ -7401,6 +7626,7 @@ function shareRoomByEmail() {
  * @returns {url} roomURL
  */
 function getRoomURL() {
+    console.log('Function called: getRoomURL');
     return myRoomUrl;
     // return isHostProtected && isPeerAuthEnabled
     //     ? window.location.origin + '/join/?room=' + roomId + '&token=' + myToken
@@ -7414,6 +7640,7 @@ function getRoomURL() {
  * @param {null|boolean} force audio off (default null can be true/false)
  */
 function handleAudio(e, init, force = null) {
+    console.log('Function called: handleAudio');
     if (!useAudio) return;
     // https://developer.mozilla.org/en-US/docs/Web/API/MediaStream/getAudioTracks
 
@@ -7454,6 +7681,7 @@ function handleAudio(e, init, force = null) {
  * @param {MediaStream} stream
  */
 async function stopAudioTracks(stream) {
+    console.log('Function called: stopAudioTracks');
     if (!stream) return;
     stream.getTracks().forEach((track) => {
         if (track.kind === 'audio') track.stop();
@@ -7467,6 +7695,7 @@ async function stopAudioTracks(stream) {
  * @param {null|boolean} force video off (default null can be true/false)
  */
 async function handleVideo(e, init, force = null) {
+    console.log('Function called: handleVideo');
     if (!useVideo) return;
     // https://developer.mozilla.org/en-US/docs/Web/API/MediaStream/getVideoTracks
 
@@ -7521,6 +7750,7 @@ async function handleVideo(e, init, force = null) {
  * @param {boolean} show
  */
 function initVideoContainerShow(show = true) {
+    console.log('Function called: initVideoContainerShow');
     initVideoContainer.style.width = show ? '100%' : 'auto';
 }
 
@@ -7529,6 +7759,7 @@ function initVideoContainerShow(show = true) {
  * @param {MediaStream} stream
  */
 async function stopVideoTracks(stream) {
+    console.log('Function called: stopVideoTracks');
     if (!stream) return;
     stream.getTracks().forEach((track) => {
         if (track.kind === 'video') track.stop();
@@ -7539,6 +7770,7 @@ async function stopVideoTracks(stream) {
  * SwapCamera front (user) - rear (environment)
  */
 async function swapCamera() {
+    console.log('Function called: swapCamera');
     // setup camera
     let camVideo = false;
     camera = camera == 'user' ? 'environment' : 'user';
@@ -7568,6 +7800,7 @@ async function swapCamera() {
  * Stop Local Video Track
  */
 async function stopLocalVideoTrack() {
+    console.log('Function called: stopLocalVideoTrack');
     if (useVideo || !isScreenStreaming) {
         const localVideoTrack = getVideoTrack(localVideoMediaStream);
         if (localVideoTrack) {
@@ -7581,6 +7814,7 @@ async function stopLocalVideoTrack() {
  * Stop Local Audio Track
  */
 async function stopLocalAudioTrack() {
+    console.log('Function called: stopLocalAudioTrack');
     const localAudioTrack = getAudioTrack(localAudioMediaStream);
     if (localAudioTrack) {
         console.log('stopLocalAudioTrack', localAudioTrack);
@@ -7592,6 +7826,7 @@ async function stopLocalAudioTrack() {
  * Load Screen media to video element
  */
 async function loadScreenMedia() {
+    console.log('Function called: loadScreenMedia');
     // If user started screen sharing before joining, create the screen tile now
     if (myScreenStatus && localScreenMediaStream) {
         await loadLocalMedia(localScreenMediaStream, 'screen');
@@ -7603,6 +7838,7 @@ async function loadScreenMedia() {
  * @param {boolean} init - Indicates if it's the initial screen share state
  */
 async function toggleScreenSharing(init = false) {
+    console.log('Function called: toggleScreenSharing');
     try {
         // Set screen frame rate
         screenMaxFrameRate = parseInt(screenFpsSelect.value, 10);
@@ -7756,6 +7992,7 @@ async function toggleScreenSharing(init = false) {
  *  Get local screen extras for deterministic routing
  */
 function getLocalScreenExtras() {
+    console.log('Function called: getLocalScreenExtras');
     try {
         const track = getVideoTrack(localScreenMediaStream);
         return track ? { screen_track_id: track.id, screen_stream_id: localScreenMediaStream.id } : undefined;
@@ -7770,6 +8007,7 @@ function getLocalScreenExtras() {
  * @param {boolean} init - Indicates whether it's an initial state
  */
 async function handleToggleScreenException(reason, init) {
+    console.log('Function called: handleToggleScreenException');
     try {
         console.warn('handleToggleScreenException', reason);
 
@@ -7821,6 +8059,7 @@ async function handleToggleScreenException(reason, init) {
  * @param {boolean} status of screen sharing
  */
 function setScreenSharingStatus(status) {
+    console.log('Function called: setScreenSharingStatus');
     setMediaButtonsClass([
         { element: initScreenShareBtn, status, mediaType: 'screen' },
         { element: screenShareBtn, status, mediaType: 'screen' },
@@ -7832,6 +8071,7 @@ function setScreenSharingStatus(status) {
  * Set myVideoStatus true
  */
 async function setMyVideoStatusTrue() {
+    console.log('Function called: setMyVideoStatusTrue');
     if (myVideoStatus || !useVideo) return;
 
     // Enable video track
@@ -7867,6 +8107,7 @@ async function setMyVideoStatusTrue() {
  * https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
  */
 function toggleFullScreen() {
+    console.log('Function called: toggleFullScreen');
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
         fullScreenBtn.className = className.fsOn;
@@ -7891,6 +8132,7 @@ function toggleFullScreen() {
  * @param {boolean} localAudioTrackChange - Indicates whether there's a change in the local audio track (default false).
  */
 async function refreshMyStreamToPeers(stream, localAudioTrackChange = false) {
+    console.log('Function called: refreshMyStreamToPeers');
     if (!thereArePeerConnections()) return;
 
     // Enable/disable local audio as requested by caller
@@ -7987,6 +8229,7 @@ async function refreshMyStreamToPeers(stream, localAudioTrackChange = false) {
  * @param {boolean} localAudioTrackChange default false
  */
 async function refreshMyLocalStream(stream, localAudioTrackChange = false) {
+    console.log('Function called: refreshMyLocalStream');
     // enable video
     if (stream && (useVideo || isScreenStreaming)) {
         const videoTrack = getVideoTrack(stream);
@@ -8041,6 +8284,7 @@ async function refreshMyLocalStream(stream, localAudioTrackChange = false) {
  * @returns boolean
  */
 function hasAudioTrack(mediaStream) {
+    console.log('Function called: hasAudioTrack');
     if (!mediaStream) return false;
     const audioTracks = mediaStream.getAudioTracks();
     return audioTracks.length > 0;
@@ -8052,6 +8296,7 @@ function hasAudioTrack(mediaStream) {
  * @returns boolean
  */
 function hasVideoTrack(mediaStream) {
+    console.log('Function called: hasVideoTrack');
     if (!mediaStream) return false;
     const videoTracks = mediaStream.getVideoTracks();
     return videoTracks.length > 0;
@@ -8063,6 +8308,7 @@ function hasVideoTrack(mediaStream) {
  * @returns {MediaStreamTrack|null}
  */
 function getVideoTrack(mediaStream) {
+    console.log('Function called: getVideoTrack');
     if (!mediaStream) return null;
     const tracks = mediaStream.getVideoTracks();
     return tracks.length > 0 ? tracks[0] : null;
@@ -8074,6 +8320,7 @@ function getVideoTrack(mediaStream) {
  * @returns {MediaStreamTrack|null}
  */
 function getAudioTrack(mediaStream) {
+    console.log('Function called: getAudioTrack');
     if (!mediaStream) return null;
     const tracks = mediaStream.getAudioTracks();
     return tracks.length > 0 ? tracks[0] : null;
@@ -8084,6 +8331,7 @@ function getAudioTrack(mediaStream) {
  * on disconnect, remove peer, kick out or leave room, we going to save it
  */
 function checkRecording() {
+    console.log('Function called: checkRecording');
     if (isStreamRecording || myVideoPeerName.innerText.includes('REC')) {
         console.log('Going to save recording');
         stopStreamRecording();
@@ -8095,6 +8343,7 @@ function checkRecording() {
  * @param {string} error
  */
 function handleRecordingError(error, popupLog = true) {
+    console.log('Function called: handleRecordingError');
     console.error('Recording error', error);
     if (popupLog) userLog('error', error);
 }
@@ -8105,6 +8354,7 @@ function handleRecordingError(error, popupLog = true) {
  * @return {string} format HH:MM:SS
  */
 function secondsToHms(d) {
+    console.log('Function called: secondsToHms');
     d = Number(d);
     const h = Math.floor(d / 3600);
     const m = Math.floor((d % 3600) / 60);
@@ -8119,9 +8369,11 @@ function secondsToHms(d) {
  * Start/Stop recording timer
  */
 function startRecordingTimer() {
+    console.log('Function called: startRecordingTimer');
     resumeRecButtons();
     recElapsedTime = 0;
     recTimer = setInterval(function printTime() {
+    console.log('Function called: printTime');
         if (!isStreamRecordingPaused) {
             recElapsedTime++;
             let recTimeElapsed = secondsToHms(recElapsedTime);
@@ -8131,6 +8383,7 @@ function startRecordingTimer() {
     }, 1000);
 }
 function stopRecordingTimer() {
+    console.log('Function called: stopRecordingTimer');
     clearInterval(recTimer);
     resetRecButtons();
 }
@@ -8140,6 +8393,7 @@ function stopRecordingTimer() {
  * @returns {boolean} is mimeType supported by media recorder
  */
 function getSupportedMimeTypes() {
+    console.log('Function called: getSupportedMimeTypes');
     const possibleTypes = ['video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/mp4'];
     console.log('POSSIBLE CODECS', possibleTypes);
     return possibleTypes.filter((mimeType) => {
@@ -8154,6 +8408,7 @@ function getSupportedMimeTypes() {
  * https://developer.mozilla.org/en-US/docs/Web/API/MediaStream
  */
 function startStreamRecording() {
+    console.log('Function called: startStreamRecording');
     recordedBlobs = [];
 
     // Get supported MIME types and set options
@@ -8190,6 +8445,7 @@ function startStreamRecording() {
  * @param {array} audioMixerTracks - Array of audio tracks from the audio mixer.
  */
 function recordingOptions(options, audioMixerTracks) {
+    console.log('Function called: recordingOptions');
     Swal.fire({
         background: swBg,
         position: 'top',
@@ -8205,7 +8461,8 @@ function recordingOptions(options, audioMixerTracks) {
         cancelButtonText: `Cancel`,
         showClass: { popup: 'animate__animated animate__fadeInDown' },
         hideClass: { popup: 'animate__animated animate__fadeOutUp' },
-    }).then((result) => {
+    }).then((result)  => {
+    console.log('Function called: audioMixerTracks');
         if (result.isConfirmed) {
             startMobileRecording(options, audioMixerTracks);
         } else if (result.isDenied) {
@@ -8220,6 +8477,7 @@ function recordingOptions(options, audioMixerTracks) {
  * @param {array} audioMixerTracks - Array of audio tracks from the audio mixer.
  */
 function startMobileRecording(options, audioMixerTracks) {
+    console.log('Function called: startMobileRecording');
     try {
         // Combine audioMixerTracks and videoTracks into a single array
         const combinedTracks = [];
@@ -8263,6 +8521,7 @@ function startMobileRecording(options, audioMixerTracks) {
  * @param {array} audioMixerTracks - Array of audio tracks from the audio mixer.
  */
 function startDesktopRecording(options, audioMixerTracks) {
+    console.log('Function called: startDesktopRecording');
     // Get the desired frame rate for screen recording
     // screenMaxFrameRate = parseInt(screenFpsSelect.value, 10);
 
@@ -8274,7 +8533,8 @@ function startDesktopRecording(options, audioMixerTracks) {
     // Request access to screen capture using the specified constraints
     navigator.mediaDevices
         .getDisplayMedia(constraints)
-        .then((screenStream) => {
+        .then((screenStream)  => {
+    console.log('Function called: constraints');
             // Get video tracks from the screen capture stream
             const screenTracks = screenStream.getVideoTracks();
             console.log('Screen video tracks --->', screenTracks);
@@ -8317,9 +8577,11 @@ function startDesktopRecording(options, audioMixerTracks) {
  * @returns {MediaStream} A MediaStream containing audio tracks.
  */
 function getAudioStreamFromAudioElements() {
+    console.log('Function called: getAudioStreamFromAudioElements');
     const audioElements = getSlALL('audio');
     const audioStream = new MediaStream();
-    audioElements.forEach((audio) => {
+    audioElements.forEach((audio)  => {
+    console.log('Function called: audioStream');
         if (audio.srcObject) {
             const audioTrack = getAudioTrack(audio.srcObject);
             if (audioTrack) {
@@ -8338,6 +8600,7 @@ function getAudioStreamFromAudioElements() {
  * @param {string} action recording action
  */
 function notifyRecording(fromId, from, fromAvatar, action) {
+    console.log('Function called: notifyRecording');
     const msg = '🔴 ' + action + ' conference recording';
     const chatMessage = {
         from: from,
@@ -8369,6 +8632,7 @@ function notifyRecording(fromId, from, fromAvatar, action) {
  * @param {boolean} disabled - If true, disable the tabs; otherwise, enable them
  */
 function toggleVideoAudioTabs(disabled = false) {
+    console.log('Function called: toggleVideoAudioTabs');
     tabVideoBtn.disabled = disabled;
     tabAudioBtn.disabled = disabled;
 }
@@ -8378,6 +8642,7 @@ function toggleVideoAudioTabs(disabled = false) {
  * @param {object} mediaRecorder
  */
 function handleMediaRecorder(mediaRecorder) {
+    console.log('Function called: handleMediaRecorder');
     mediaRecorder.start();
     mediaRecorder.addEventListener('start', handleMediaRecorderStart);
     mediaRecorder.addEventListener('dataavailable', handleMediaRecorderData);
@@ -8389,6 +8654,7 @@ function handleMediaRecorder(mediaRecorder) {
  * @param {object} event of media recorder
  */
 function handleMediaRecorderStart(event) {
+    console.log('Function called: handleMediaRecorderStart');
     toggleVideoAudioTabs(true);
     startRecordingTimer();
     emitPeersAction('recStart');
@@ -8407,6 +8673,7 @@ function handleMediaRecorderStart(event) {
  * @param {object} event of media recorder
  */
 function handleMediaRecorderData(event) {
+    console.log('Function called: handleMediaRecorderData');
     console.log('MediaRecorder data: ', event);
     if (event.data && event.data.size > 0) recordedBlobs.push(event.data);
 }
@@ -8416,6 +8683,7 @@ function handleMediaRecorderData(event) {
  * @param {object} event of media recorder
  */
 function handleMediaRecorderStop(event) {
+    console.log('Function called: handleMediaRecorderStop');
     toggleVideoAudioTabs(false);
     console.log('MediaRecorder stopped: ', event);
     console.log('MediaRecorder Blobs: ', recordedBlobs);
@@ -8442,6 +8710,7 @@ function handleMediaRecorderStop(event) {
  * Stop recording
  */
 function stopStreamRecording() {
+    console.log('Function called: stopStreamRecording');
     mediaRecorder.stop();
     audioRecorder.stopMixedAudioStream();
 }
@@ -8450,6 +8719,7 @@ function stopStreamRecording() {
  * Pause recording display buttons
  */
 function pauseRecButtons() {
+    console.log('Function called: pauseRecButtons');
     displayElements([
         { element: pauseRecBtn, display: false },
         { element: resumeRecBtn, display: true },
@@ -8459,6 +8729,7 @@ function pauseRecButtons() {
  * Resume recording display buttons
  */
 function resumeRecButtons() {
+    console.log('Function called: resumeRecButtons');
     displayElements([
         { element: resumeRecBtn, display: false },
         { element: pauseRecBtn, display: true },
@@ -8468,6 +8739,7 @@ function resumeRecButtons() {
  * Reset recording display buttons
  */
 function resetRecButtons() {
+    console.log('Function called: resetRecButtons');
     displayElements([
         { element: pauseRecBtn, display: false },
         { element: resumeRecBtn, display: false },
@@ -8478,6 +8750,7 @@ function resetRecButtons() {
  * Pause recording
  */
 function pauseRecording() {
+    console.log('Function called: pauseRecording');
     if (mediaRecorder) {
         isStreamRecordingPaused = true;
         mediaRecorder.pause();
@@ -8490,6 +8763,7 @@ function pauseRecording() {
  * Resume recording
  */
 function resumeRecording() {
+    console.log('Function called: resumeRecording');
     if (mediaRecorder) {
         mediaRecorder.resume();
         isStreamRecordingPaused = false;
@@ -8503,6 +8777,7 @@ function resumeRecording() {
  * @returns {Function|null}
  */
 function getWebmFixerFn() {
+    console.log('Function called: getWebmFixerFn');
     const fn = window.FixWebmDuration;
     return typeof fn === 'function' ? fn : null;
 }
@@ -8511,6 +8786,7 @@ function getWebmFixerFn() {
  * Download recorded stream
  */
 async function downloadRecordedStream() {
+    console.log('Function called: downloadRecordedStream');
     try {
         // Check if we have recorded data
         if (!recordedBlobs || recordedBlobs.length === 0) {
@@ -8553,6 +8829,7 @@ async function downloadRecordedStream() {
 
         // Fix WebM duration to make it seekable
         const fixWebmDuration = async (blob) => {
+    console.log('Function called: fixWebmDuration');
             if (type !== 'webm') return blob;
             try {
                 const fix = getWebmFixerFn();
@@ -8581,6 +8858,7 @@ async function downloadRecordedStream() {
  * @param {string} peer_id socket.id
  */
 function createChatDataChannel(peer_id) {
+    console.log('Function called: createChatDataChannel');
     chatDataChannels[peer_id] = peerConnections[peer_id].createDataChannel('mirotalk_chat_channel');
     chatDataChannels[peer_id].onopen = (event) => {
         console.log('chatDataChannels created', event);
@@ -8591,6 +8869,7 @@ function createChatDataChannel(peer_id) {
  * Set the chat room & caption on full screen mode for mobile
  */
 function setChatRoomAndCaptionForMobile() {
+    console.log('Function called: setChatRoomAndCaptionForMobile');
     if (isMobileDevice) {
         // chat full screen
         setSP('--msger-height', '99%');
@@ -8610,6 +8889,7 @@ function setChatRoomAndCaptionForMobile() {
  * Show msger draggable on center screen position
  */
 function showChatRoomDraggable() {
+    console.log('Function called: showChatRoomDraggable');
     playSound('newMessage');
     if (isMobileDevice) {
         elemDisplay(buttonsBar, false);
@@ -8633,6 +8913,7 @@ function showChatRoomDraggable() {
  * Show caption box draggable on center screen position
  */
 function showCaptionDraggable() {
+    console.log('Function called: showCaptionDraggable');
     playSound('newMessage');
     if (isMobileDevice) {
         elemDisplay(buttonsBar, false);
@@ -8655,6 +8936,7 @@ function showCaptionDraggable() {
  * Toggle Chat dropdown menu
  */
 function toggleChatDropDownMenu() {
+    console.log('Function called: toggleChatDropDownMenu');
     msgerDropDownContent.style.display === 'block'
         ? (msgerDropDownContent.style.display = 'none')
         : (msgerDropDownContent.style.display = 'block');
@@ -8664,6 +8946,7 @@ function toggleChatDropDownMenu() {
  * Chat maximize
  */
 function chatMaximize() {
+    console.log('Function called: chatMaximize');
     elemDisplay(msgerMaxBtn, false);
     elemDisplay(msgerMinBtn, true);
     chatCenter();
@@ -8675,6 +8958,7 @@ function chatMaximize() {
  * Chat minimize
  */
 function chatMinimize() {
+    console.log('Function called: chatMinimize');
     elemDisplay(msgerMinBtn, false);
     elemDisplay(msgerMaxBtn, true);
     chatCenter();
@@ -8696,6 +8980,7 @@ function chatMinimize() {
  * Set chat position
  */
 function chatCenter() {
+    console.log('Function called: chatCenter');
     if (!isChatPinned) {
         msgerDraggable.style.position = 'fixed';
         msgerDraggable.style.display = 'flex';
@@ -8712,6 +8997,7 @@ function chatCenter() {
  * @returns boolean
  */
 function canBePinned() {
+    console.log('Function called: canBePinned');
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     return viewportWidth >= 1024 && viewportHeight >= 768;
@@ -8721,6 +9007,7 @@ function canBePinned() {
  * Toggle Chat Pin
  */
 function toggleChatPin() {
+    console.log('Function called: toggleChatPin');
     if (isCaptionPinned) {
         return userLog('toast', 'Please unpin the Caption that appears to be currently pinned');
     }
@@ -8732,6 +9019,7 @@ function toggleChatPin() {
  * Handle chat pin
  */
 function chatPin() {
+    console.log('Function called: chatPin');
     videoMediaContainerPin();
     chatPinned();
     isChatPinned = true;
@@ -8745,6 +9033,7 @@ function chatPin() {
  * Handle chat unpin
  */
 function chatUnpin() {
+    console.log('Function called: chatUnpin');
     videoMediaContainerUnpin();
     setSP('--msger-width', '420px');
     setSP('--msger-height', '680px');
@@ -8763,6 +9052,7 @@ function chatUnpin() {
  * Move Chat center left
  */
 function chatLeftCenter() {
+    console.log('Function called: chatLeftCenter');
     msgerDraggable.style.position = 'fixed';
     msgerDraggable.style.display = 'flex';
     msgerDraggable.style.top = '50%';
@@ -8774,6 +9064,7 @@ function chatLeftCenter() {
  * Chat is pinned
  */
 function chatPinned() {
+    console.log('Function called: chatPinned');
     msgerDraggable.style.position = 'absolute';
     msgerDraggable.style.top = 0;
     msgerDraggable.style.right = 0;
@@ -8787,6 +9078,7 @@ function chatPinned() {
  * Caption maximize
  */
 function captionMaximize() {
+    console.log('Function called: captionMaximize');
     elemDisplay(captionMaxBtn, false);
     elemDisplay(captionMinBtn, true);
     captionCenter();
@@ -8798,6 +9090,7 @@ function captionMaximize() {
  * Caption minimize
  */
 function captionMinimize() {
+    console.log('Function called: captionMinimize');
     elemDisplay(captionMinBtn, false);
     elemDisplay(captionMaxBtn, true);
     captionCenter();
@@ -8819,6 +9112,7 @@ function captionMinimize() {
  * Set chat position
  */
 function captionCenter() {
+    console.log('Function called: captionCenter');
     if (!isCaptionPinned) {
         captionDraggable.style.position = 'fixed';
         captionDraggable.style.display = 'flex';
@@ -8834,6 +9128,7 @@ function captionCenter() {
  * Toggle Caption Pin
  */
 function toggleCaptionPin() {
+    console.log('Function called: toggleCaptionPin');
     if (isChatPinned) {
         return userLog('toast', 'Please unpin the Chat that appears to be currently pinned');
     }
@@ -8845,6 +9140,7 @@ function toggleCaptionPin() {
  * Handle caption pin
  */
 function captionPin() {
+    console.log('Function called: captionPin');
     videoMediaContainerPin();
     captionPinned();
     isCaptionPinned = true;
@@ -8858,6 +9154,7 @@ function captionPin() {
  * Handle caption unpin
  */
 function captionUnpin() {
+    console.log('Function called: captionUnpin');
     videoMediaContainerUnpin();
     setSP('--caption-width', '420px');
     setSP('--caption-height', '680px');
@@ -8876,6 +9173,7 @@ function captionUnpin() {
  * Move Caption center right
  */
 function captionRightCenter() {
+    console.log('Function called: captionRightCenter');
     captionDraggable.style.position = 'fixed';
     captionDraggable.style.display = 'flex';
     captionDraggable.style.top = '50%';
@@ -8887,6 +9185,7 @@ function captionRightCenter() {
  * Caption is pinned
  */
 function captionPinned() {
+    console.log('Function called: captionPinned');
     captionDraggable.style.position = 'absolute';
     captionDraggable.style.top = 0;
     captionDraggable.style.right = 0;
@@ -8900,6 +9199,7 @@ function captionPinned() {
  * Clean chat messages
  */
 function cleanMessages() {
+    console.log('Function called: cleanMessages');
     playSound('newMessage');
     Swal.fire({
         background: swBg,
@@ -8933,6 +9233,7 @@ function cleanMessages() {
  * Clean captions
  */
 function cleanCaptions() {
+    console.log('Function called: cleanCaptions');
     playSound('newMessage');
     Swal.fire({
         background: swBg,
@@ -8963,6 +9264,7 @@ function cleanCaptions() {
  * Hide chat room and emoji picker
  */
 function hideChatRoomAndEmojiPicker() {
+    console.log('Function called: hideChatRoomAndEmojiPicker');
     if (isChatPinned) {
         chatUnpin();
     }
@@ -8979,6 +9281,7 @@ function hideChatRoomAndEmojiPicker() {
  * Hide chat room and emoji picker
  */
 function hideCaptionBox() {
+    console.log('Function called: hideCaptionBox');
     if (isCaptionPinned) {
         captionUnpin();
     }
@@ -8992,6 +9295,7 @@ function hideCaptionBox() {
  * Send Chat messages to peers in the room
  */
 async function sendChatMessage() {
+    console.log('Function called: sendChatMessage');
     if (!thereArePeerConnections() && !isChatGPTOn) {
         cleanMessageInput();
         isChatPasteTxt = false;
@@ -9017,6 +9321,7 @@ async function sendChatMessage() {
  * @param {object} dataMessage chat messages
  */
 function handleDataChannelChat(dataMessage) {
+    console.log('Function called: handleDataChannelChat');
     if (!dataMessage) return;
 
     // sanitize all params
@@ -9059,6 +9364,7 @@ function handleDataChannelChat(dataMessage) {
  * Clean input txt message
  */
 function cleanMessageInput() {
+    console.log('Function called: cleanMessageInput');
     msgerInput.value = '';
     msgerInput.style.height = '15px';
 }
@@ -9067,6 +9373,7 @@ function cleanMessageInput() {
  * Paste from clipboard to input txt message
  */
 function pasteToMessageInput() {
+    console.log('Function called: pasteToMessageInput');
     navigator.clipboard
         .readText()
         .then((text) => {
@@ -9084,6 +9391,7 @@ function pasteToMessageInput() {
  * @param {object} config data
  */
 function handleDataChannelSpeechTranscript(config) {
+    console.log('Function called: handleDataChannelSpeechTranscript');
     handleSpeechTranscript(config);
 }
 
@@ -9092,6 +9400,7 @@ function handleDataChannelSpeechTranscript(config) {
  * @param {object} config data
  */
 function handleSpeechTranscript(config) {
+    console.log('Function called: handleSpeechTranscript');
     if (!config) return;
     console.log('Handle speech transcript', config);
 
@@ -9138,6 +9447,7 @@ function handleSpeechTranscript(config) {
  * @param {string} regex string to replace
  */
 function escapeSpecialChars(regex) {
+    console.log('Function called: escapeSpecialChars');
     return regex.replace(/([()[{*+.$^\\|?])/g, '\\$1');
 }
 
@@ -9152,6 +9462,7 @@ function escapeSpecialChars(regex) {
  * @param {string} to peer name
  */
 function appendMessage(from, img, side, msg, privateMsg, msgId = null, to = '') {
+    console.log('Function called: appendMessage');
     let time = getFormatDate(new Date());
 
     // sanitize all params
@@ -9267,11 +9578,13 @@ function appendMessage(from, img, side, msg, privateMsg, msgId = null, to = '') 
  * @returns string message processed
  */
 function processMessage(message) {
+    console.log('Function called: processMessage');
     const codeBlockRegex = /```([a-zA-Z0-9]+)?\n([\s\S]*?)```/g;
     let parts = [];
     let lastIndex = 0;
 
-    message.replace(codeBlockRegex, (match, lang, code, offset) => {
+    message.replace(codeBlockRegex, (match, lang, code, offset)  => {
+    console.log('Function called: lastIndex');
         if (offset > lastIndex) {
             parts.push({ type: 'text', value: message.slice(lastIndex, offset) });
         }
@@ -9301,13 +9614,15 @@ function processMessage(message) {
  * @param {integer} speed
  */
 function streamMessage(element, message, speed = 100) {
+    console.log('Function called: streamMessage');
     const parts = processMessage(message);
     const words = parts.split(' ');
 
     let textBuffer = '';
     let wordIndex = 0;
 
-    const interval = setInterval(() => {
+    const interval = setInterval(()  => {
+    console.log('Function called: interval');
         if (wordIndex < words.length) {
             textBuffer += words[wordIndex] + ' ';
             element.innerHTML = textBuffer;
@@ -9319,8 +9634,10 @@ function streamMessage(element, message, speed = 100) {
     }, speed);
 
     function highlightCodeBlocks(element) {
+    console.log('Function called: highlightCodeBlocks');
         const codeBlocks = element.querySelectorAll('pre code');
-        codeBlocks.forEach((block) => {
+        codeBlocks.forEach((block)  => {
+    console.log('Function called: codeBlocks');
             hljs.highlightElement(block);
         });
     }
@@ -9335,6 +9652,7 @@ function streamMessage(element, message, speed = 100) {
  * @param {string} msg message
  */
 function speechMessage(newMsg = true, from, msg) {
+    console.log('Function called: speechMessage');
     const speech = new SpeechSynthesisUtterance();
     speech.text = (newMsg ? 'New' : '') + ' message from:' + from + '. The message is:' + msg;
     speech.rate = 0.9;
@@ -9348,6 +9666,7 @@ function speechMessage(newMsg = true, from, msg) {
  * @param {string} elemId
  */
 function speechElementText(newMsg = true, from, elemId) {
+    console.log('Function called: speechElementText');
     const element = getId(elemId);
     speechMessage(newMsg, from, element.innerText);
 }
@@ -9357,6 +9676,7 @@ function speechElementText(newMsg = true, from, elemId) {
  * @param {string} id msg id
  */
 function deleteMessage(id) {
+    console.log('Function called: deleteMessage');
     playSound('newMessage');
     Swal.fire({
         background: swBg,
@@ -9369,7 +9689,8 @@ function deleteMessage(id) {
         denyButtonText: `No`,
         showClass: { popup: 'animate__animated animate__fadeInDown' },
         hideClass: { popup: 'animate__animated animate__fadeOutUp' },
-    }).then((result) => {
+    }).then((result)  => {
+    console.log('Function called: element');
         // clean this message
         if (result.isConfirmed) {
             getId(id).remove();
@@ -9383,10 +9704,12 @@ function deleteMessage(id) {
  * @param {string} id
  */
 function copyToClipboard(id) {
+    console.log('Function called: copyToClipboard');
     const text = getId(id).innerText;
     navigator.clipboard
         .writeText(text)
-        .then(() => {
+        .then(()  => {
+    console.log('Function called: text');
             msgPopup('success', 'Message copied!', 'top-end', 1000);
         })
         .catch((err) => {
@@ -9399,6 +9722,7 @@ function copyToClipboard(id) {
  * @param {object} peers all peers info connected to the same room
  */
 async function msgerAddPeers(peers) {
+    console.log('Function called: msgerAddPeers');
     // console.log("peers", peers);
     // add all current Participants
     for (const peer_id in peers) {
@@ -9446,6 +9770,7 @@ async function msgerAddPeers(peers) {
  * Search peer by name in chat room lists to send the private messages
  */
 function searchPeer() {
+    console.log('Function called: searchPeer');
     const searchPeerBarName = getId('searchPeerBarName').value.toLowerCase();
     const msgerPeerInputarea = getEcN('msger-peer-inputarea');
     for (let i = 0; i < msgerPeerInputarea.length; i++) {
@@ -9462,6 +9787,7 @@ function searchPeer() {
  * @param {string} peer_id socket.id
  */
 function msgerRemovePeer(peer_id) {
+    console.log('Function called: msgerRemovePeer');
     const msgerPrivateDiv = getId(peer_id + '_pMsgDiv');
     if (msgerPrivateDiv) {
         let peerToRemove = msgerPrivateDiv.firstChild;
@@ -9480,6 +9806,7 @@ function msgerRemovePeer(peer_id) {
  * @param {string} peerId chat peer_id
  */
 function addMsgerPrivateBtn(msgerPrivateBtn, msgerPrivateMsgInput, peerId) {
+    console.log('Function called: addMsgerPrivateBtn');
     // add button to send private messages
     msgerPrivateBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -9499,6 +9826,7 @@ function addMsgerPrivateBtn(msgerPrivateBtn, msgerPrivateMsgInput, peerId) {
     };
 
     function sendPrivateMessage() {
+    console.log('Function called: sendPrivateMessage');
         msgerPrivateMsgInput.value = filterXSS(msgerPrivateMsgInput.value.trim());
         const pMsg = checkMsg(msgerPrivateMsgInput.value);
         if (!pMsg) {
@@ -9530,6 +9858,7 @@ function addMsgerPrivateBtn(msgerPrivateBtn, msgerPrivateMsgInput, peerId) {
  * @returns {string} html format
  */
 function checkMsg(txt) {
+    console.log('Function called: checkMsg');
     const text = filterXSS(txt);
     if (text.trim().length == 0) return;
     if (isHtml(text)) return sanitizeHtml(text);
@@ -9554,6 +9883,7 @@ function checkMsg(txt) {
  * @returns Html as string
  */
 function sanitizeHtml(input) {
+    console.log('Function called: sanitizeHtml');
     const map = {
         '&': '&amp;',
         '<': '&lt;',
@@ -9571,6 +9901,7 @@ function sanitizeHtml(input) {
  * @returns
  */
 function isHtml(str) {
+    console.log('Function called: isHtml');
     let a = document.createElement('div');
     a.innerHTML = str;
     for (let c = a.childNodes, i = c.length; i--; ) {
@@ -9585,6 +9916,7 @@ function isHtml(str) {
  * @returns boolean true/false
  */
 function isValidHttpURL(input) {
+    console.log('Function called: isValidHttpURL');
     try {
         new URL(input);
         return true;
@@ -9599,6 +9931,7 @@ function isValidHttpURL(input) {
  * @returns {boolean} true/false
  */
 function isImageURL(input) {
+    console.log('Function called: isImageURL');
     if (!input || typeof input !== 'string') return false;
     try {
         const url = new URL(input);
@@ -9616,6 +9949,7 @@ function isImageURL(input) {
  * @returns img
  */
 function getImage(text) {
+    console.log('Function called: getImage');
     const url = filterXSS(text);
     const div = document.createElement('div');
     const img = document.createElement('img');
@@ -9633,6 +9967,7 @@ function getImage(text) {
  * @returns a href
  */
 function getLink(text) {
+    console.log('Function called: getLink');
     const url = filterXSS(text);
     const a = document.createElement('a');
     const div = document.createElement('div');
@@ -9651,6 +9986,7 @@ function getLink(text) {
  * @returns pre
  */
 function getPre(txt) {
+    console.log('Function called: getPre');
     const text = filterXSS(txt);
     const pre = document.createElement('pre');
     const div = document.createElement('div');
@@ -9666,6 +10002,7 @@ function getPre(txt) {
  * @returns html iframe
  */
 function getIframe(text) {
+    console.log('Function called: getIframe');
     const url = filterXSS(text);
     const iframe = document.createElement('iframe');
     const div = document.createElement('div');
@@ -9691,6 +10028,7 @@ function getIframe(text) {
  * @returns integer lines
  */
 function getLineBreaks(text) {
+    console.log('Function called: getLineBreaks');
     return (text.match(/\n/g) || []).length;
 }
 
@@ -9698,6 +10036,7 @@ function getLineBreaks(text) {
  * Check chat input line breaks and value length
  */
 function checkLineBreaks() {
+    console.log('Function called: checkLineBreaks');
     msgerInput.style.height = '';
     if (getLineBreaks(msgerInput.value) > 0 || msgerInput.value.length > 50) {
         msgerInput.style.height = '200px';
@@ -9710,6 +10049,7 @@ function checkLineBreaks() {
  * @returns {string} date format h:m:s
  */
 function getFormatDate(date) {
+    console.log('Function called: getFormatDate');
     const time = date.toTimeString().split(' ')[0];
     return `${time}`;
 }
@@ -9724,6 +10064,7 @@ function getFormatDate(date) {
  * @param {string} id peer_id
  */
 function emitMsg(from, fromAvatar, to, msg, privateMsg, id) {
+    console.log('Function called: emitMsg');
     if (!msg) return;
 
     // sanitize all params
@@ -9755,6 +10096,7 @@ function emitMsg(from, fromAvatar, to, msg, privateMsg, id) {
  * @param {string} msg
  */
 async function getChatGPTmessage(msg) {
+    console.log('Function called: getChatGPTmessage');
     console.log('Send ChatGPT message:', msg);
     signalingSocket
         .request('data', {
@@ -9788,6 +10130,7 @@ async function getChatGPTmessage(msg) {
  * Hide - Show emoji picker div
  */
 function hideShowEmojiPicker() {
+    console.log('Function called: hideShowEmojiPicker');
     if (!isChatEmojiVisible) {
         elemDisplay(msgerEmojiPicker, true, 'block');
         setColor(msgerEmojiBtn, '#FFFF00');
@@ -9804,6 +10147,7 @@ function hideShowEmojiPicker() {
  * https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
  */
 function downloadChatMsgs() {
+    console.log('Function called: downloadChatMsgs');
     let a = document.createElement('a');
     a.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(chatMessages, null, 1));
     a.download = getDataTimeString() + '-CHAT.txt';
@@ -9818,6 +10162,7 @@ function downloadChatMsgs() {
  * https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
  */
 function downloadCaptions() {
+    console.log('Function called: downloadCaptions');
     let a = document.createElement('a');
     a.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(transcripts, null, 1));
     a.download = getDataTimeString() + roomId + '-CAPTIONS.txt';
@@ -9831,6 +10176,7 @@ function downloadCaptions() {
  * Hide - show my settings
  */
 function hideShowMySettings() {
+    console.log('Function called: hideShowMySettings');
     if (!isMySettingsVisible) {
         playSound('newMessage');
         // adapt it for mobile
@@ -9863,6 +10209,7 @@ function hideShowMySettings() {
  * @param {string} tabName name of the tab to open
  */
 function openTab(evt, tabName) {
+    console.log('Function called: openTab');
     const tabN = getId(tabName);
     const tabContent = getEcN('tabcontent');
     const tabLinks = getEcN('tablinks');
@@ -9881,6 +10228,7 @@ function openTab(evt, tabName) {
  * Update myPeerName to other peers in the room
  */
 async function updateMyPeerName() {
+    console.log('Function called: updateMyPeerName');
     // myNewPeerName empty
     if (!myPeerNameSet.value) return;
 
@@ -9931,6 +10279,7 @@ async function updateMyPeerName() {
  * @param {object} config data
  */
 function handlePeerName(config) {
+    console.log('Function called: handlePeerName');
     const { peer_id, peer_name, peer_avatar } = config;
     const videoName = getId(peer_id + '_name');
     const screenName = getId(peer_id + '_screen_name');
@@ -9960,6 +10309,7 @@ function handlePeerName(config) {
  * @param {boolean} status true/false
  */
 async function emitPeerStatus(element, status, extras = {}) {
+    console.log('Function called: emitPeerStatus');
     sendToServer('peerStatus', {
         room_id: roomId,
         peer_name: myPeerName,
@@ -9975,6 +10325,7 @@ async function emitPeerStatus(element, status, extras = {}) {
  * @param {boolean} isHideMeActive
  */
 function handleHideMe(isHideMeActive) {
+    console.log('Function called: handleHideMe');
     if (isHideMeActive) {
         if (isVideoPinned) myVideoPinBtn.click();
         elemDisplay(myVideoWrap, false);
@@ -9994,6 +10345,7 @@ function handleHideMe(isHideMeActive) {
  * Set my Hand Status and Icon
  */
 function setMyHandStatus() {
+    console.log('Function called: setMyHandStatus');
     myHandStatus = !myHandStatus;
     if (myHandStatus) {
         // Raise hand
@@ -10015,6 +10367,7 @@ function setMyHandStatus() {
  * @param {boolean} status of my audio
  */
 function setMyAudioStatus(status) {
+    console.log('Function called: setMyAudioStatus');
     console.log('My audio status', status);
     const audioClassName = status ? className.audioOn : className.audioOff;
     audioBtn.className = audioClassName;
@@ -10031,6 +10384,7 @@ function setMyAudioStatus(status) {
  * @param {boolean} status of my video
  */
 function setMyVideoStatus(status) {
+    console.log('Function called: setMyVideoStatus');
     console.log('My video status', status);
 
     // On video OFF display my video avatar name
@@ -10070,6 +10424,7 @@ function setMyVideoStatus(status) {
  * @param {object} config data
  */
 function handlePeerStatus(config) {
+    console.log('Function called: handlePeerStatus');
     //
     const { peer_id, peer_name, element, status, extras } = config;
 
@@ -10101,6 +10456,7 @@ function handlePeerStatus(config) {
  * @param {boolean} status of the hand
  */
 function setPeerHandStatus(peer_id, peer_name, status) {
+    console.log('Function called: setPeerHandStatus');
     const peerHandStatus = getId(peer_id + '_handStatus');
     if (status) {
         elemDisplay(peerHandStatus, true);
@@ -10117,6 +10473,7 @@ function setPeerHandStatus(peer_id, peer_name, status) {
  * @param {boolean} status of peer audio
  */
 function setPeerAudioStatus(peer_id, status) {
+    console.log('Function called: setPeerAudioStatus');
     const peerAudioStatus = getId(peer_id + '_audioStatus');
     const peerAudioVolume = getId(peer_id + '_audioVolume');
 
@@ -10136,6 +10493,7 @@ function setPeerAudioStatus(peer_id, status) {
  * @param {string} mediaId peer audio id
  */
 function handleAudioVolume(audioVolumeId, mediaId) {
+    console.log('Function called: handleAudioVolume');
     const media = getId(mediaId);
     const audioVolume = getId(audioVolumeId);
     if (audioVolume && media) {
@@ -10157,6 +10515,7 @@ function handleAudioVolume(audioVolumeId, mediaId) {
  * @param {string} peer_id socket.id
  */
 function handlePeerAudioBtn(peer_id) {
+    console.log('Function called: handlePeerAudioBtn');
     if (!buttons.remote.audioBtnClickAllowed) return;
     const peerAudioBtn = getId(peer_id + '_audioStatus');
     peerAudioBtn.onclick = () => {
@@ -10173,6 +10532,7 @@ function handlePeerAudioBtn(peer_id) {
  * @param {string} peer_id socket.id
  */
 function handlePeerVideoBtn(peer_id) {
+    console.log('Function called: handlePeerVideoBtn');
     if (!useVideo || !buttons.remote.videoBtnClickAllowed) return;
     const peerVideoBtn = getId(peer_id + '_videoStatus');
     peerVideoBtn.onclick = () => {
@@ -10185,6 +10545,7 @@ function handlePeerVideoBtn(peer_id) {
 }
 
 function handlePeerGeoLocation(peer_id) {
+    console.log('Function called: handlePeerGeoLocation');
     const remoteGeoLocationBtn = getId(peer_id + '_geoLocation');
     remoteGeoLocationBtn.onclick = () => {
         isPresenter
@@ -10200,6 +10561,7 @@ function handlePeerGeoLocation(peer_id) {
  * @param {string} privateMsgBtnId private message button id
  */
 function handlePeerPrivateMsg(peer_id, toPeerName, privateMsgBtnId) {
+    console.log('Function called: handlePeerPrivateMsg');
     const peerPrivateMsg = getId(privateMsgBtnId);
     peerPrivateMsg.onclick = (e) => {
         e.preventDefault();
@@ -10213,6 +10575,7 @@ function handlePeerPrivateMsg(peer_id, toPeerName, privateMsgBtnId) {
  * @param {string} toPeerName
  */
 function sendPrivateMsgToPeer(toPeerId, toPeerName) {
+    console.log('Function called: sendPrivateMsgToPeer');
     Swal.fire({
         background: swBg,
         position: 'center',
@@ -10244,6 +10607,7 @@ function sendPrivateMsgToPeer(toPeerId, toPeerName) {
  * @param {string} fileShareBtnId
  */
 function handlePeerSendFile(peer_id, fileShareBtnId) {
+    console.log('Function called: handlePeerSendFile');
     const peerFileSendBtn = getId(fileShareBtnId);
     peerFileSendBtn.onclick = () => {
         selectFileToShare(peer_id);
@@ -10256,6 +10620,7 @@ function handlePeerSendFile(peer_id, fileShareBtnId) {
  * @param {string} peerYoutubeBtnId youtube button id
  */
 function handlePeerVideoAudioUrl(peer_id, peerYoutubeBtnId) {
+    console.log('Function called: handlePeerVideoAudioUrl');
     const peerYoutubeBtn = getId(peerYoutubeBtnId);
     peerYoutubeBtn.onclick = () => {
         sendVideoUrl(peer_id);
@@ -10268,6 +10633,7 @@ function handlePeerVideoAudioUrl(peer_id, peerYoutubeBtnId) {
  * @param {boolean} status of peer video
  */
 function setPeerVideoStatus(peer_id, status) {
+    console.log('Function called: setPeerVideoStatus');
     const peerVideoPlayer = getId(peer_id + '___video');
     const peerVideoAvatarImage = getId(peer_id + '_avatar');
     const peerVideoStatus = getId(peer_id + '_videoStatus');
@@ -10296,6 +10662,7 @@ function setPeerVideoStatus(peer_id, status) {
 }
 
 function setPeerScreenStatus(peer_id, status, extras) {
+    console.log('Function called: setPeerScreenStatus');
     // Track screen status on the peer model
     if (!allPeers[peer_id]) allPeers[peer_id] = {};
     allPeers[peer_id]['peer_screen_status'] = !!status;
@@ -10317,6 +10684,7 @@ function setPeerScreenStatus(peer_id, status, extras) {
  * @param {object} extras additional data
  */
 async function emitPeersAction(peerAction, extras = {}) {
+    console.log('Function called: emitPeersAction');
     if (!thereArePeerConnections()) return;
 
     sendToServer('peerAction', {
@@ -10339,6 +10707,7 @@ async function emitPeersAction(peerAction, extras = {}) {
  * @param {object} extras additional data
  */
 async function emitPeerAction(peer_id, peerAction, extras = {}) {
+    console.log('Function called: emitPeerAction');
     if (!thereArePeerConnections()) return;
 
     sendToServer('peerAction', {
@@ -10358,6 +10727,7 @@ async function emitPeerAction(peer_id, peerAction, extras = {}) {
  * @param {object} config data
  */
 function handlePeerAction(config) {
+    console.log('Function called: handlePeerAction');
     console.log('Handle peer action: ', config);
     const { peer_id, peer_name, peer_avatar, peer_use_video, peer_action, extras } = config;
 
@@ -10393,6 +10763,7 @@ function handlePeerAction(config) {
  * @param {object} config data
  */
 function handleCmd(config) {
+    console.log('Function called: handleCmd');
     console.log('Handle cmd: ', config);
 
     const { action, data } = config;
@@ -10418,6 +10789,7 @@ function handleCmd(config) {
  * @param {object} message
  */
 function handleMessage(message) {
+    console.log('Function called: handleMessage');
     console.log('Got message', message);
 
     switch (message.type) {
@@ -10436,6 +10808,7 @@ function handleMessage(message) {
  * @param {integer} duration time in ms
  */
 function handleEmoji(message, duration = 5000) {
+    console.log('Function called: handleEmoji');
     if (userEmoji) {
         const emojiDisplay = document.createElement('div');
         emojiDisplay.className = 'animate__animated animate__backInUp';
@@ -10463,6 +10836,7 @@ function handleEmoji(message, duration = 5000) {
  * @param {object} message
  */
 function handleEmojiSound(message) {
+    console.log('Function called: handleEmojiSound');
     const path = '../sounds/emoji/';
     const force = true; // play even if sound effects are off
     switch (message.shortcodes) {
@@ -10520,6 +10894,7 @@ function handleEmojiSound(message) {
  * @param {object} extras
  */
 function handleScreenStart(peer_id, extras) {
+    console.log('Function called: handleScreenStart');
     const remoteScreenAvatarImage = getId(peer_id + '_screen_avatar');
     const remoteScreenStatusBtn = getId(peer_id + '_screenStatus');
 
@@ -10552,6 +10927,7 @@ function handleScreenStart(peer_id, extras) {
  * @param {boolean} peer_use_video
  */
 function handleScreenStop(peer_id, peer_use_video) {
+    console.log('Function called: handleScreenStop');
     const remoteScreenStream = getId(peer_id + '___screen');
     const remoteScreenWrap = getId(peer_id + '_screenWrap');
     const remoteScreenAvatarImage = getId(peer_id + '_screen_avatar');
@@ -10606,6 +10982,7 @@ function handleScreenStop(peer_id, peer_use_video) {
  * @param {string} peer_name peer name
  */
 function setMyAudioOff(peer_name) {
+    console.log('Function called: setMyAudioOff');
     if (myAudioStatus === false || !useAudio) return;
     const audioTrack = getAudioTrack(localAudioMediaStream);
     if (audioTrack) {
@@ -10625,6 +11002,7 @@ function setMyAudioOff(peer_name) {
  * @param {string} peer_name peer name
  */
 function setMyAudioOn(peer_name) {
+    console.log('Function called: setMyAudioOn');
     if (myAudioStatus === true || !useAudio) return;
     const audioTrack = getAudioTrack(localAudioMediaStream);
     if (audioTrack) {
@@ -10644,6 +11022,7 @@ function setMyAudioOn(peer_name) {
  * @param {string} peer_name peer name
  */
 function setMyVideoOff(peer_name) {
+    console.log('Function called: setMyVideoOff');
     if (!useVideo) return;
     //if (myVideoStatus === false || !useVideo) return;
     const videoTrack = getVideoTrack(localVideoMediaStream);
@@ -10664,6 +11043,7 @@ function setMyVideoOff(peer_name) {
  * @param {string} element type audio/video
  */
 function disableAllPeers(element) {
+    console.log('Function called: disableAllPeers');
     if (!thereArePeerConnections()) {
         return userLog('info', 'No participants detected');
     }
@@ -10703,6 +11083,7 @@ function disableAllPeers(element) {
  * Eject all participants in the room expect yourself
  */
 function ejectEveryone() {
+    console.log('Function called: ejectEveryone');
     if (!thereArePeerConnections()) {
         return userLog('info', 'No participants detected');
     }
@@ -10730,6 +11111,7 @@ function ejectEveryone() {
  * @param {string} element type audio/video
  */
 function disablePeer(peer_id, element) {
+    console.log('Function called: disablePeer');
     if (!thereArePeerConnections()) {
         return userLog('info', 'No participants detected');
     }
@@ -10771,6 +11153,7 @@ function disablePeer(peer_id, element) {
  * @param {boolean} emit data to signaling server
  */
 function handleRoomAction(config, emit = false) {
+    console.log('Function called: handleRoomAction');
     const { action } = config;
     if (emit) {
         const thisConfig = {
@@ -10797,7 +11180,8 @@ function handleRoomAction(config, emit = false) {
                     denyButtonText: `Cancel`,
                     showClass: { popup: 'animate__animated animate__fadeInDown' },
                     hideClass: { popup: 'animate__animated animate__fadeOutUp' },
-                    inputValidator: (pwd) => {
+                    inputValidator: (pwd)  => {
+    console.log('Function called: thisConfig');
                         if (!pwd) return 'Please enter the Room password';
                         thisRoomPassword = pwd;
                     },
@@ -10827,6 +11211,7 @@ function handleRoomAction(config, emit = false) {
  * @param {object} config data
  */
 function handleRoomStatus(config) {
+    console.log('Function called: handleRoomStatus');
     const { action, peer_name, password } = config;
 
     switch (action) {
@@ -10856,6 +11241,7 @@ function handleRoomStatus(config) {
  * Room is locked you provide a wrong password, can't access!
  */
 function handleRoomLocked() {
+    console.log('Function called: handleRoomLocked');
     playSound('eject');
 
     console.log('Room is Locked, try with another one');
@@ -10879,6 +11265,7 @@ function handleRoomLocked() {
  * Try to unlock the room by providing a valid password
  */
 function handleUnlockTheRoom() {
+    console.log('Function called: handleUnlockTheRoom');
     playSound('alert');
 
     Swal.fire({
@@ -10913,6 +11300,7 @@ function handleUnlockTheRoom() {
  * Handle whiteboard toogle
  */
 function handleWhiteboardToggle() {
+    console.log('Function called: handleWhiteboardToggle');
     thereArePeerConnections() ? whiteboardAction(getWhiteboardAction('toggle')) : toggleWhiteboard();
 }
 
@@ -10920,6 +11308,7 @@ function handleWhiteboardToggle() {
  * Toggle Lock/Unlock whiteboard
  */
 function toggleLockUnlockWhiteboard() {
+    console.log('Function called: toggleLockUnlockWhiteboard');
     wbIsLock = !wbIsLock;
 
     const btnToShow = wbIsLock ? whiteboardUnlockBtn : whiteboardLockBtn;
@@ -10943,6 +11332,7 @@ function toggleLockUnlockWhiteboard() {
  * Whiteboard: Show-Hide
  */
 function toggleWhiteboard() {
+    console.log('Function called: toggleWhiteboard');
     if (!wbIsOpen) {
         playSound('newMessage');
         setTippy(whiteboardBtn, 'Close the Whiteboard', placement);
@@ -10960,6 +11350,7 @@ function toggleWhiteboard() {
  * Whiteboard: setup
  */
 function setupWhiteboard() {
+    console.log('Function called: setupWhiteboard');
     setupWhiteboardCanvas();
     setupWhiteboardCanvasSize();
     setupWhiteboardLocalListners();
@@ -10969,6 +11360,7 @@ function setupWhiteboard() {
  * Whiteboard: setup canvas
  */
 function setupWhiteboardCanvas() {
+    console.log('Function called: setupWhiteboardCanvas');
     wbCanvas = new fabric.Canvas('wbCanvas');
     wbCanvas.freeDrawingBrush.color = '#FFFFFF';
     wbCanvas.freeDrawingBrush.width = 3;
@@ -10979,6 +11371,7 @@ function setupWhiteboardCanvas() {
  * Whiteboard: setup canvas size
  */
 function setupWhiteboardCanvasSize() {
+    console.log('Function called: setupWhiteboardCanvasSize');
     const optimalSize = [wbWidth, wbHeight];
     const scaleFactorX = window.innerWidth / optimalSize[0];
     const scaleFactorY = window.innerHeight / optimalSize[1];
@@ -11008,6 +11401,7 @@ function setupWhiteboardCanvasSize() {
  * @param {string} h height
  */
 function setWhiteboardSize(w, h) {
+    console.log('Function called: setWhiteboardSize');
     setSP('--wb-width', w);
     setSP('--wb-height', h);
 }
@@ -11017,6 +11411,7 @@ function setWhiteboardSize(w, h) {
  * @param {string} color whiteboard bg
  */
 function setWhiteboardBgColor(color) {
+    console.log('Function called: setWhiteboardBgColor');
     const config = {
         room_id: roomId,
         peer_name: myPeerName,
@@ -11031,6 +11426,7 @@ function setWhiteboardBgColor(color) {
  * @param {boolean} status of drawing mode
  */
 function whiteboardIsDrawingMode(status) {
+    console.log('Function called: whiteboardIsDrawingMode');
     wbCanvas.isDrawingMode = status;
     if (status) {
         setColor(whiteboardPencilBtn, 'green');
@@ -11048,6 +11444,7 @@ function whiteboardIsDrawingMode(status) {
  * @param {boolean} status if eraser on
  */
 function whiteboardIsEraser(status) {
+    console.log('Function called: whiteboardIsEraser');
     whiteboardIsDrawingMode(false);
     wbIsEraser = status;
     setColor(whiteboardEraserBtn, wbIsEraser ? 'green' : 'white');
@@ -11059,6 +11456,7 @@ function whiteboardIsEraser(status) {
  * @param {string} color to set
  */
 function setColor(elem, color) {
+    console.log('Function called: setColor');
     elem.style.color = color;
 }
 
@@ -11067,6 +11465,7 @@ function setColor(elem, color) {
  * @param {string} type of object to add
  */
 function whiteboardAddObj(type) {
+    console.log('Function called: whiteboardAddObj');
     switch (type) {
         case 'imgUrl':
             Swal.fire({
@@ -11162,6 +11561,7 @@ function whiteboardAddObj(type) {
  * @param {object} renderToCanvas
  */
 function setupFileSelection(title, accept, renderToCanvas) {
+    console.log('Function called: setupFileSelection');
     Swal.fire({
         allowOutsideClick: false,
         background: swBg,
@@ -11189,31 +11589,36 @@ function setupFileSelection(title, accept, renderToCanvas) {
         denyButtonText: `Cancel`,
         showClass: { popup: 'animate__animated animate__fadeInDown' },
         hideClass: { popup: 'animate__animated animate__fadeOutUp' },
-    }).then((result) => {
+    }).then((result)  => {
+    console.log('Function called: dropArea');
         if (result.isConfirmed) {
             renderToCanvas(result.value);
         }
     });
 
     function handleDragEnter(e) {
+    console.log('Function called: handleDragEnter');
         e.preventDefault();
         e.stopPropagation();
         e.target.style.background = 'var(--body-bg)';
     }
 
     function handleDragOver(e) {
+    console.log('Function called: handleDragOver');
         e.preventDefault();
         e.stopPropagation();
         e.dataTransfer.dropEffect = 'copy';
     }
 
     function handleDragLeave(e) {
+    console.log('Function called: handleDragLeave');
         e.preventDefault();
         e.stopPropagation();
         e.target.style.background = '';
     }
 
     function handleDrop(e) {
+    console.log('Function called: handleDrop');
         e.preventDefault();
         e.stopPropagation();
         const dt = e.dataTransfer;
@@ -11223,6 +11628,7 @@ function setupFileSelection(title, accept, renderToCanvas) {
     }
 
     function handleFiles(files) {
+    console.log('Function called: handleFiles');
         if (files.length > 0) {
             const file = files[0];
             console.log('Selected file:', file);
@@ -11237,6 +11643,7 @@ function setupFileSelection(title, accept, renderToCanvas) {
  * @param {object} wbCanvasImg
  */
 function renderImageToCanvas(wbCanvasImg) {
+    console.log('Function called: renderImageToCanvas');
     if (wbCanvasImg && wbCanvasImg.size > 0) {
         let reader = new FileReader();
         reader.onload = function (event) {
@@ -11257,6 +11664,7 @@ function renderImageToCanvas(wbCanvasImg) {
  * @param {object} wbCanvasPdf
  */
 async function renderPdfToCanvas(wbCanvasPdf) {
+    console.log('Function called: renderPdfToCanvas');
     if (wbCanvasPdf && wbCanvasPdf.size > 0) {
         let reader = new FileReader();
         reader.onload = async function (event) {
@@ -11275,6 +11683,7 @@ async function renderPdfToCanvas(wbCanvasPdf) {
  * @returns object Data URL
  */
 function readBlob(blob) {
+    console.log('Function called: readBlob');
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.addEventListener('load', () => resolve(reader.result));
@@ -11290,6 +11699,7 @@ function readBlob(blob) {
  * @returns canvas object
  */
 async function loadPDF(pdfData, pages) {
+    console.log('Function called: loadPDF');
     const pdfjsLib = window['pdfjs-dist/build/pdf'];
     pdfData = pdfData instanceof Blob ? await readBlob(pdfData) : pdfData;
     const data = atob(pdfData.startsWith(Base64Prefix) ? pdfData.substring(Base64Prefix.length) : pdfData);
@@ -11297,7 +11707,8 @@ async function loadPDF(pdfData, pages) {
         const pdf = await pdfjsLib.getDocument({ data }).promise;
         const numPages = pdf.numPages;
         const canvases = await Promise.all(
-            Array.from({ length: numPages }, (_, i) => {
+            Array.from({ length: numPages }, (_, i)  => {
+    console.log('Function called: canvases');
                 const pageNumber = i + 1;
                 if (pages && pages.indexOf(pageNumber) === -1) return null;
                 return pdf.getPage(pageNumber).then(async (page) => {
@@ -11328,10 +11739,12 @@ async function loadPDF(pdfData, pages) {
  * @param {object} canvas
  */
 async function pdfToImage(pdfData, canvas) {
+    console.log('Function called: pdfToImage');
     const scale = 1 / window.devicePixelRatio;
     try {
         const canvases = await loadPDF(pdfData);
-        canvases.forEach(async (c) => {
+        canvases.forEach(async (c)  => {
+    console.log('Function called: canvases');
             canvas.add(
                 new fabric.Image(await c, {
                     scaleX: scale,
@@ -11350,6 +11763,7 @@ async function pdfToImage(pdfData, canvas) {
  * @param {object} obj to add
  */
 function addWbCanvasObj(obj) {
+    console.log('Function called: addWbCanvasObj');
     if (obj) {
         wbCanvas.add(obj).setActiveObject(obj);
         whiteboardIsDrawingMode(false);
@@ -11361,6 +11775,7 @@ function addWbCanvasObj(obj) {
  * Whiteboard: Local listners
  */
 function setupWhiteboardLocalListners() {
+    console.log('Function called: setupWhiteboardLocalListners');
     wbCanvas.on('mouse:down', function (e) {
         mouseDown(e);
     });
@@ -11381,6 +11796,7 @@ function setupWhiteboardLocalListners() {
  * @returns
  */
 function mouseDown(e) {
+    console.log('Function called: mouseDown');
     wbIsDrawing = true;
     if (wbIsEraser && e.target) {
         wbCanvas.remove(e.target);
@@ -11392,6 +11808,7 @@ function mouseDown(e) {
  * Whiteboard: mouse up
  */
 function mouseUp() {
+    console.log('Function called: mouseUp');
     wbIsDrawing = false;
     wbCanvasToJson();
 }
@@ -11401,6 +11818,7 @@ function mouseUp() {
  * @returns
  */
 function mouseMove() {
+    console.log('Function called: mouseMove');
     if (wbIsEraser) {
         wbCanvas.hoverCursor = 'not-allowed';
         return;
@@ -11414,6 +11832,7 @@ function mouseMove() {
  * Whiteboard: tmp objects
  */
 function objectAdded() {
+    console.log('Function called: objectAdded');
     if (!wbIsRedoing) wbPop = [];
     wbIsRedoing = false;
 }
@@ -11423,6 +11842,7 @@ function objectAdded() {
  * @param {string} color to set
  */
 function wbCanvasBackgroundColor(color) {
+    console.log('Function called: wbCanvasBackgroundColor');
     setSP('--wb-bg', color);
     wbBackgroundColorEl.value = color;
     wbCanvas.setBackgroundColor(color);
@@ -11433,6 +11853,7 @@ function wbCanvasBackgroundColor(color) {
  * Whiteboard: undo
  */
 function wbCanvasUndo() {
+    console.log('Function called: wbCanvasUndo');
     if (wbCanvas._objects.length > 0) {
         wbPop.push(wbCanvas._objects.pop());
         wbCanvas.renderAll();
@@ -11443,6 +11864,7 @@ function wbCanvasUndo() {
  * Whiteboard: redo
  */
 function wbCanvasRedo() {
+    console.log('Function called: wbCanvasRedo');
     if (wbPop.length > 0) {
         wbIsRedoing = true;
         wbCanvas.add(wbPop.pop());
@@ -11453,6 +11875,7 @@ function wbCanvasRedo() {
  * Whiteboard: save as images png
  */
 function wbCanvasSaveImg() {
+    console.log('Function called: wbCanvasSaveImg');
     const dataURL = wbCanvas.toDataURL({
         width: wbCanvas.getWidth(),
         height: wbCanvas.getHeight(),
@@ -11472,6 +11895,7 @@ function wbCanvasSaveImg() {
  * @param {string} fileName to save
  */
 function saveDataToFile(dataURL, fileName) {
+    console.log('Function called: saveDataToFile');
     const a = document.createElement('a');
     elemDisplay(a, false);
     a.href = dataURL;
@@ -11488,6 +11912,7 @@ function saveDataToFile(dataURL, fileName) {
  * Whiteboard: canvas objects to json
  */
 function wbCanvasToJson() {
+    console.log('Function called: wbCanvasToJson');
     if (!isPresenter && wbIsLock) return;
     if (thereArePeerConnections()) {
         const config = {
@@ -11502,6 +11927,7 @@ function wbCanvasToJson() {
  * If whiteboard opened, update canvas to all peers connected
  */
 async function wbUpdate() {
+    console.log('Function called: wbUpdate');
     if (wbIsOpen && thereArePeerConnections()) {
         wbCanvasToJson();
         whiteboardAction(getWhiteboardAction(wbIsLock ? 'lock' : 'unlock'));
@@ -11513,6 +11939,7 @@ async function wbUpdate() {
  * @param {object} config data
  */
 function handleJsonToWbCanvas(config) {
+    console.log('Function called: handleJsonToWbCanvas');
     if (!wbIsOpen) toggleWhiteboard();
 
     wbCanvas.loadFromJSON(config.wbCanvasJson);
@@ -11529,6 +11956,7 @@ function handleJsonToWbCanvas(config) {
  * @returns {object} data
  */
 function getWhiteboardAction(action) {
+    console.log('Function called: getWhiteboardAction');
     return {
         room_id: roomId,
         peer_name: myPeerName,
@@ -11540,6 +11968,7 @@ function getWhiteboardAction(action) {
  * Whiteboard: Clean content
  */
 function confirmCleanBoard() {
+    console.log('Function called: confirmCleanBoard');
     playSound('newMessage');
 
     Swal.fire({
@@ -11553,7 +11982,8 @@ function confirmCleanBoard() {
         denyButtonText: `No`,
         showClass: { popup: 'animate__animated animate__fadeInDown' },
         hideClass: { popup: 'animate__animated animate__fadeOutUp' },
-    }).then((result) => {
+    }).then((result)  => {
+    console.log('Function called: config');
         if (result.isConfirmed) {
             whiteboardAction(getWhiteboardAction('clear'));
             playSound('delete');
@@ -11566,6 +11996,7 @@ function confirmCleanBoard() {
  * @param {object} config data
  */
 function whiteboardAction(config) {
+    console.log('Function called: whiteboardAction');
     if (thereArePeerConnections()) {
         sendToServer('whiteboardAction', config);
     }
@@ -11578,6 +12009,7 @@ function whiteboardAction(config) {
  * @param {boolean} logMe popup action
  */
 function handleWhiteboardAction(config, logMe = true) {
+    console.log('Function called: handleWhiteboardAction');
     const { peer_name, action, color } = config;
 
     if (logMe) {
@@ -11628,6 +12060,7 @@ function handleWhiteboardAction(config, logMe = true) {
  * @param {boolean} status
  */
 function wbDrawing(status) {
+    console.log('Function called: wbDrawing');
     wbCanvas.isDrawingMode = status; // Disable free drawing
     wbCanvas.selection = status; // Disable object selection
     wbCanvas.forEachObject(function (obj) {
@@ -11640,6 +12073,7 @@ function wbDrawing(status) {
  * @param {string} peer_id socket.id
  */
 function createFileSharingDataChannel(peer_id) {
+    console.log('Function called: createFileSharingDataChannel');
     fileDataChannels[peer_id] = peerConnections[peer_id].createDataChannel('mirotalk_file_sharing_channel');
     fileDataChannels[peer_id].binaryType = 'arraybuffer';
     fileDataChannels[peer_id].onopen = (event) => {
@@ -11652,6 +12086,7 @@ function createFileSharingDataChannel(peer_id) {
  * @param {object} data received
  */
 function handleDataChannelFileSharing(data) {
+    console.log('Function called: handleDataChannelFileSharing');
     if (!receiveInProgress) return;
     receiveBuffer.push(data);
     receivedSize += data.byteLength;
@@ -11675,6 +12110,7 @@ function handleDataChannelFileSharing(data) {
  * @param {boolean} broadcast sent to all or not
  */
 function sendFileData(peer_id, broadcast) {
+    console.log('Function called: sendFileData');
     console.log('Send file ' + fileToSend.name + ' size ' + bytesToSize(fileToSend.size) + ' type ' + fileToSend.type);
 
     sendInProgress = true;
@@ -11722,6 +12158,7 @@ function sendFileData(peer_id, broadcast) {
         if (offset < fileToSend.size) readSlice(offset);
     });
     const readSlice = (o) => {
+    console.log('Function called: readSlice');
         for (const peer_id in fileDataChannels) {
             // https://stackoverflow.com/questions/71285807/i-am-trying-to-share-a-file-over-webrtc-but-after-some-time-it-stops-and-log-rt
             if (fileDataChannels[peer_id].bufferedAmount > fileDataChannels[peer_id].bufferedAmountLowThreshold) {
@@ -11743,6 +12180,7 @@ function sendFileData(peer_id, broadcast) {
  * @param {object} data to sent
  */
 function sendFSData(data) {
+    console.log('Function called: sendFSData');
     const broadcast = data.broadcast;
     const peer_id_to_send = data.peer_id;
     if (broadcast) {
@@ -11764,6 +12202,7 @@ function sendFSData(data) {
  * Abort the file transfer
  */
 function abortFileTransfer() {
+    console.log('Function called: abortFileTransfer');
     if (fileReader && fileReader.readyState === 1) {
         fileReader.abort();
         elemDisplay(sendFileDiv, false);
@@ -11779,6 +12218,7 @@ function abortFileTransfer() {
  * Abort file transfer
  */
 function abortReceiveFileTransfer() {
+    console.log('Function called: abortReceiveFileTransfer');
     sendToServer('fileReceiveAbort', {
         room_id: roomId,
         peer_name: myPeerName,
@@ -11790,6 +12230,7 @@ function abortReceiveFileTransfer() {
  * @param object config - peer info that abort the file transfer
  */
 function handleAbortFileTransfer(config) {
+    console.log('Function called: handleAbortFileTransfer');
     console.log(`File transfer aborted by ${config.peer_name}`);
     userLog('toast', `⚠️ File transfer aborted by ${config.peer_name}`);
     abortFileTransfer();
@@ -11799,6 +12240,7 @@ function handleAbortFileTransfer(config) {
  * File Transfer aborted by peer
  */
 function handleFileAbort() {
+    console.log('Function called: handleFileAbort');
     receiveBuffer = [];
     incomingFileData = [];
     receivedSize = 0;
@@ -11812,6 +12254,7 @@ function handleFileAbort() {
  * Hide incoming file transfer
  */
 function hideFileTransfer() {
+    console.log('Function called: hideFileTransfer');
     elemDisplay(receiveFileDiv, false);
 }
 
@@ -11821,6 +12264,7 @@ function hideFileTransfer() {
  * @param {boolean} broadcast send to all (default false)
  */
 function selectFileToShare(peer_id, broadcast = false) {
+    console.log('Function called: selectFileToShare');
     playSound('newMessage');
 
     Swal.fire({
@@ -11852,31 +12296,36 @@ function selectFileToShare(peer_id, broadcast = false) {
         denyButtonText: `Cancel`,
         showClass: { popup: 'animate__animated animate__fadeInDown' },
         hideClass: { popup: 'animate__animated animate__fadeOutUp' },
-    }).then((result) => {
+    }).then((result)  => {
+    console.log('Function called: dropArea');
         if (result.isConfirmed) {
             sendFileInformations(result.value, peer_id, broadcast);
         }
     });
 
     function handleDragEnter(e) {
+    console.log('Function called: handleDragEnter');
         e.preventDefault();
         e.stopPropagation();
         e.target.style.background = 'var(--body-bg)';
     }
 
     function handleDragOver(e) {
+    console.log('Function called: handleDragOver');
         e.preventDefault();
         e.stopPropagation();
         e.dataTransfer.dropEffect = 'copy';
     }
 
     function handleDragLeave(e) {
+    console.log('Function called: handleDragLeave');
         e.preventDefault();
         e.stopPropagation();
         e.target.style.background = '';
     }
 
     function handleDrop(e) {
+    console.log('Function called: handleDrop');
         e.preventDefault();
         e.stopPropagation();
         const dt = e.dataTransfer;
@@ -11886,6 +12335,7 @@ function selectFileToShare(peer_id, broadcast = false) {
     }
 
     function handleFiles(files) {
+    console.log('Function called: handleFiles');
         if (files.length > 0) {
             const file = files[0];
             console.log('Selected file:', file);
@@ -11903,6 +12353,7 @@ function selectFileToShare(peer_id, broadcast = false) {
  * @returns
  */
 function sendFileInformations(file, peer_id, broadcast = false) {
+    console.log('Function called: sendFileInformations');
     fileToSend = file;
     // check if valid
     if (fileToSend && fileToSend.size > 0) {
@@ -11946,7 +12397,8 @@ function sendFileInformations(file, peer_id, broadcast = false) {
         sendToServer('fileInfo', fileInfo);
 
         // send the File
-        setTimeout(() => {
+        setTimeout(()  => {
+    console.log('Function called: fileInfo');
             sendFileData(peer_id, broadcast);
         }, 1000);
     } else {
@@ -11960,6 +12412,7 @@ function sendFileInformations(file, peer_id, broadcast = false) {
  * @returns html pre json
  */
 function toHtmlJson(obj) {
+    console.log('Function called: toHtmlJson');
     return '<pre>' + JSON.stringify(obj, null, 4) + '</pre>';
 }
 
@@ -11968,6 +12421,7 @@ function toHtmlJson(obj) {
  * @param {object} config data
  */
 function handleFileInfo(config) {
+    console.log('Function called: handleFileInfo');
     incomingFileInfo = config;
     incomingFileData = [];
     receiveBuffer = [];
@@ -12014,6 +12468,7 @@ function handleFileInfo(config) {
  * https://developer.mozilla.org/en-US/docs/Web/API/Blob
  */
 function endDownload() {
+    console.log('Function called: endDownload');
     playSound('download');
 
     // save received file into Blob
@@ -12073,6 +12528,7 @@ function endDownload() {
  * @param {string} file to save
  */
 function saveBlobToFile(blob, file) {
+    console.log('Function called: saveBlobToFile');
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     elemDisplay(a, false);
@@ -12091,6 +12547,7 @@ function saveBlobToFile(blob, file) {
  * @param {string} peer_id socket.id
  */
 function sendVideoUrl(peer_id = null) {
+    console.log('Function called: sendVideoUrl');
     playSound('newMessage');
 
     Swal.fire({
@@ -12153,6 +12610,7 @@ function sendVideoUrl(peer_id = null) {
  * Open video url Player
  */
 function openVideoUrlPlayer(config) {
+    console.log('Function called: openVideoUrlPlayer');
     console.log('Open video Player', config);
     const videoSrc = config.video_src;
     const videoType = getVideoType(videoSrc);
@@ -12193,6 +12651,7 @@ function openVideoUrlPlayer(config) {
  * @returns string video type
  */
 function getVideoType(url) {
+    console.log('Function called: getVideoType');
     if (url.endsWith('.mp4')) return 'video/mp4';
     if (url.endsWith('.mp3')) return 'video/mp3';
     if (url.endsWith('.webm')) return 'video/webm';
@@ -12206,6 +12665,7 @@ function getVideoType(url) {
  * @returns boolean true/false
  */
 function isVideoTypeSupported(url) {
+    console.log('Function called: isVideoTypeSupported');
     if (
         url.endsWith('.mp4') ||
         url.endsWith('.mp3') ||
@@ -12223,6 +12683,7 @@ function isVideoTypeSupported(url) {
  * @returns {string} YouTube Embed URL
  */
 function getYoutubeEmbed(url) {
+    console.log('Function called: getYoutubeEmbed');
     const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     const match = url.match(regExp);
     return match && match[7].length == 11 ? 'https://www.youtube.com/embed/' + match[7] + '?autoplay=1' : false;
@@ -12232,6 +12693,7 @@ function getYoutubeEmbed(url) {
  * Close Video Url Player
  */
 function closeVideoUrlPlayer() {
+    console.log('Function called: closeVideoUrlPlayer');
     console.log('Close video Player', {
         videoUrlIframe: videoUrlIframe.src,
         videoAudioUrlElement: videoAudioUrlElement.src,
@@ -12249,6 +12711,7 @@ function closeVideoUrlPlayer() {
  * @param {object} config data
  */
 function emitVideoPlayer(video_action, config = {}) {
+    console.log('Function called: emitVideoPlayer');
     sendToServer('videoPlayer', {
         room_id: roomId,
         peer_name: myPeerName,
@@ -12263,6 +12726,7 @@ function emitVideoPlayer(video_action, config = {}) {
  * @param {object} config data
  */
 function handleVideoPlayer(config) {
+    console.log('Function called: handleVideoPlayer');
     const { peer_name, video_action } = config;
     //
     switch (video_action) {
@@ -12284,9 +12748,11 @@ function handleVideoPlayer(config) {
  * @param {string} peer_id socket.id
  */
 function handlePeerKickOutBtn(peer_id) {
+    console.log('Function called: handlePeerKickOutBtn');
     if (!buttons.remote.showKickOutBtn) return;
     const peerKickOutBtn = getId(peer_id + '_kickOut');
-    peerKickOutBtn.addEventListener('click', (e) => {
+    peerKickOutBtn.addEventListener('click', (e)  => {
+    console.log('Function called: peerKickOutBtn');
         isPresenter
             ? kickOut(peer_id)
             : msgPopup('warning', 'Only the presenter can eject participants', 'top-end', 4000);
@@ -12298,6 +12764,7 @@ function handlePeerKickOutBtn(peer_id) {
  * @param {string} peer_id socket.id
  */
 function kickOut(peer_id) {
+    console.log('Function called: kickOut');
     const pName = getId(peer_id + '_name').innerText;
 
     Swal.fire({
@@ -12311,7 +12778,8 @@ function kickOut(peer_id) {
         denyButtonText: `No`,
         showClass: { popup: 'animate__animated animate__fadeInDown' },
         hideClass: { popup: 'animate__animated animate__fadeOutUp' },
-    }).then((result) => {
+    }).then((result)  => {
+    console.log('Function called: pName');
         if (result.isConfirmed) {
             // send peer to kick out from room
             sendToServer('kickOut', {
@@ -12329,6 +12797,7 @@ function kickOut(peer_id) {
  * @param {object} config data
  */
 function handleCaptionActions(config) {
+    console.log('Function called: handleCaptionActions');
     const { peer_name, action } = config;
 
     switch (action) {
@@ -12380,6 +12849,7 @@ function handleCaptionActions(config) {
  * @param {object} config data
  */
 function handleKickedOut(config) {
+    console.log('Function called: handleKickedOut');
     signalingSocket.disconnect();
 
     const { peer_name } = config;
@@ -12429,6 +12899,7 @@ function handleKickedOut(config) {
  * Rough book about info
  */
 function showAbout() {
+    console.log('Function called: showAbout');
     playSound('newMessage');
 
     Swal.fire({
@@ -12454,6 +12925,7 @@ function showAbout() {
  * Leave the Room and create a new one
  */
 function leaveRoom() {
+    console.log('Function called: leaveRoom');
     checkRecording();
     surveyActive ? leaveFeedback() : redirectOnLeave();
 }
@@ -12462,6 +12934,7 @@ function leaveRoom() {
  * Ask for feedback when room exit
  */
 function leaveFeedback() {
+    console.log('Function called: leaveFeedback');
     Swal.fire({
         allowOutsideClick: false,
         allowEscapeKey: false,
@@ -12490,6 +12963,7 @@ function leaveFeedback() {
 }
 
 function redirectOnLeave() {
+    console.log('Function called: redirectOnLeave');
     redirectActive ? openURL(redirectURL) : openURL('/newcall');
 }
 
@@ -12499,6 +12973,7 @@ function redirectOnLeave() {
  * @param {object} dragObj children element to make father draggable (click + mouse move)
  */
 function dragElement(elmnt, dragObj) {
+    console.log('Function called: dragElement');
     let pos1 = 0,
         pos2 = 0,
         pos3 = 0,
@@ -12512,6 +12987,7 @@ function dragElement(elmnt, dragObj) {
     }
 
     function dragMouseDown(e) {
+    console.log('Function called: dragMouseDown');
         e = e || window.event;
         e.preventDefault();
         // get the mouse cursor position at startup:
@@ -12523,6 +12999,7 @@ function dragElement(elmnt, dragObj) {
     }
 
     function elementDrag(e) {
+    console.log('Function called: elementDrag');
         e = e || window.event;
         e.preventDefault();
         // calculate the new cursor position:
@@ -12536,6 +13013,7 @@ function dragElement(elmnt, dragObj) {
     }
 
     function closeDragElement() {
+    console.log('Function called: closeDragElement');
         // stop moving when mouse button is released:
         document.onmouseup = null;
         document.onmousemove = null;
@@ -12548,6 +13026,7 @@ function dragElement(elmnt, dragObj) {
  * @param {object} dragObj children element to make father undraggable
  */
 function undragElement(elmnt, dragObj) {
+    console.log('Function called: undragElement');
     if (dragObj) {
         dragObj.onmousedown = null;
     } else {
@@ -12562,6 +13041,7 @@ function undragElement(elmnt, dragObj) {
  * @returns {string} date string format: DD-MM-YYYY-H_M_S
  */
 function getDataTimeString() {
+    console.log('Function called: getDataTimeString');
     const d = new Date();
     const date = d.toISOString().split('T')[0];
     const time = d.toTimeString().split(' ')[0];
@@ -12574,6 +13054,7 @@ function getDataTimeString() {
  * @returns {string} converted size
  */
 function bytesToSize(bytes) {
+    console.log('Function called: bytesToSize');
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
     if (bytes == 0) return '0 Byte';
     const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
@@ -12585,6 +13066,7 @@ function bytesToSize(bytes) {
  * @param {object} data peer audio
  */
 function handlePeerVolume(data) {
+    console.log('Function called: handlePeerVolume');
     const { peer_id, volume } = data;
 
     let audioColorTmp = '#19bb5c';
@@ -12621,6 +13103,7 @@ function handlePeerVolume(data) {
  * @param {object} data my audio
  */
 function handleMyVolume(data) {
+    console.log('Function called: handleMyVolume');
     const { volume } = data;
 
     let audioColorTmp = '#19bb5c';
@@ -12654,6 +13137,7 @@ function handleMyVolume(data) {
  * @param {integer} delay ms
  */
 function applyBoxShadowEffect(element, color, delay = 200) {
+    console.log('Function called: applyBoxShadowEffect');
     if (element) {
         element.style.boxShadow = `0 0 20px ${color}`;
         setTimeout(() => {
@@ -12669,6 +13153,7 @@ function applyBoxShadowEffect(element, color, delay = 200) {
  * @param {integer} timer toast duration ms
  */
 function userLog(type, message, timer = 3000) {
+    console.log('Function called: userLog');
     switch (type) {
         case 'warning':
         case 'error':
@@ -12738,6 +13223,7 @@ function userLog(type, message, timer = 3000) {
  * @param {integer} duration time popup in ms
  */
 function toastMessage(icon, title, html, position = 'top-end', duration = 3000) {
+    console.log('Function called: toastMessage');
     if (['warning', 'error'].includes(icon)) playSound('alert');
 
     const Toast = Swal.mixin({
@@ -12767,6 +13253,7 @@ function toastMessage(icon, title, html, position = 'top-end', duration = 3000) 
  * @param {string} redirectURL if set on press ok will be redirected to the URL
  */
 function msgHTML(icon, imageUrl, title, html, position = 'center', redirectURL = false) {
+    console.log('Function called: msgHTML');
     if (['warning', 'error'].includes(icon)) playSound('alert');
 
     Swal.fire({
@@ -12795,6 +13282,7 @@ function msgHTML(icon, imageUrl, title, html, position = 'center', redirectURL =
  * @param {integer} timer ms before to hide
  */
 function msgPopup(icon, message, position, timer = 1000) {
+    console.log('Function called: msgPopup');
     if (['warning', 'error'].includes(icon)) playSound('alert');
 
     const Toast = Swal.mixin({
@@ -12820,6 +13308,7 @@ function msgPopup(icon, message, position, timer = 1000) {
  * @param {string} path of sound files
  */
 async function playSound(name, force = false, path = '../sounds/') {
+    console.log('Function called: playSound');
     if (!notifyBySound && !force) return;
     const sound = path + name + '.mp3';
     const audioToPlay = new Audio(sound);
@@ -12839,6 +13328,7 @@ async function playSound(name, force = false, path = '../sounds/') {
  * @param {boolean} blank if true opne url in the new tab
  */
 function openURL(url, blank = false) {
+    console.log('Function called: openURL');
     blank ? window.open(url, '_blank') : (window.location.href = url);
 }
 
@@ -12848,6 +13338,7 @@ function openURL(url, blank = false) {
  * @param {string} displayState of the element
  */
 function toggleClassElements(className, displayState) {
+    console.log('Function called: toggleClassElements');
     const elements = getEcN(className);
     for (let i = 0; i < elements.length; i++) {
         elements[i].style.display = displayState;
@@ -12860,6 +13351,7 @@ function toggleClassElements(className, displayState) {
  * @returns boolean
  */
 function isValidFileName(fileName) {
+    console.log('Function called: isValidFileName');
     const invalidChars = /[\\\/\?\*\|:"<>]/;
     return !invalidChars.test(fileName);
 }
@@ -12869,6 +13361,7 @@ function isValidFileName(fileName) {
  * @return {boolean} true/false
  */
 function checkWebRTCSupported() {
+    console.log('Function called: checkWebRTCSupported');
     return !!(navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function');
 }
 
@@ -12878,6 +13371,7 @@ function checkWebRTCSupported() {
  * @returns {object} element
  */
 function getId(id) {
+    console.log('Function called: getId');
     return document.getElementById(id);
 }
 
@@ -12887,6 +13381,7 @@ function getId(id) {
  * @returns all element descendants of node that match selectors.
  */
 function getQsA(selectors) {
+    console.log('Function called: getQsA');
     return document.querySelectorAll(selectors);
 }
 
@@ -12896,6 +13391,7 @@ function getQsA(selectors) {
  * @returns element
  */
 function getQs(selector) {
+    console.log('Function called: getQs');
     return document.querySelector(selector);
 }
 
@@ -12906,6 +13402,7 @@ function getQs(selector) {
  * @returns {objects} element
  */
 function setSP(key, value) {
+    console.log('Function called: setSP');
     return document.documentElement.style.setProperty(key, value);
 }
 
@@ -12915,6 +13412,7 @@ function setSP(key, value) {
  * @returns {object} element
  */
 function getSl(selector) {
+    console.log('Function called: getSl');
     return document.querySelector(selector);
 }
 
@@ -12924,6 +13422,7 @@ function getSl(selector) {
  * @returns {object} element
  */
 function getSlALL(selector) {
+    console.log('Function called: getSlALL');
     return document.querySelectorAll(selector);
 }
 
@@ -12933,6 +13432,7 @@ function getSlALL(selector) {
  * @returns {object} element
  */
 function getEcN(className) {
+    console.log('Function called: getEcN');
     return document.getElementsByClassName(className);
 }
 
@@ -12942,6 +13442,7 @@ function getEcN(className) {
  * @returns element
  */
 function getName(name) {
+    console.log('Function called: getName');
     return document.getElementsByName(name);
 }
 
@@ -12951,6 +13452,7 @@ function getName(name) {
  * @param {boolean} yes true/false
  */
 function elemDisplay(element, display, mode = 'inline') {
+    console.log('Function called: elemDisplay');
     element.style.display = display ? mode : 'none';
 }
 
@@ -12960,6 +13462,7 @@ function elemDisplay(element, display, mode = 'inline') {
  * @returns sanitized object
  */
 function sanitizeXSS(src) {
+    console.log('Function called: sanitizeXSS');
     return JSON.parse(filterXSS(JSON.stringify(src)));
 }
 
@@ -12969,6 +13472,7 @@ function sanitizeXSS(src) {
  * @param {boolean} disabled
  */
 function disable(elem, disabled) {
+    console.log('Function called: disable');
     elem.disabled = disabled;
 }
 
@@ -12976,6 +13480,7 @@ function disable(elem, disabled) {
  * Handle dropdown menus on hover (for non-touch devices)
  */
 function handleDropdownHover() {
+    console.log('Function called: handleDropdownHover');
     // Detect if device supports hover (pointer: fine) - works on desktop, tablets with mouse, etc.
     const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -12989,11 +13494,13 @@ function handleDropdownHover() {
         let chatTimeoutId;
 
         const showChatDropdown = () => {
+    console.log('Function called: showChatDropdown');
             clearTimeout(chatTimeoutId);
             elemDisplay(msgerDropDownContent, true, 'block');
         };
 
         const hideChatDropdown = () => {
+    console.log('Function called: hideChatDropdown');
             chatTimeoutId = setTimeout(() => {
                 elemDisplay(msgerDropDownContent, false);
             }, 200);
@@ -13010,11 +13517,13 @@ function handleDropdownHover() {
         let wbTimeoutId;
 
         const showWhiteboardDropdown = () => {
+    console.log('Function called: showWhiteboardDropdown');
             clearTimeout(wbTimeoutId);
             elemDisplay(whiteboardDropdownMenu, true, 'block');
         };
 
         const hideWhiteboardDropdown = () => {
+    console.log('Function called: hideWhiteboardDropdown');
             wbTimeoutId = setTimeout(() => {
                 elemDisplay(whiteboardDropdownMenu, false);
             }, 200);
@@ -13035,6 +13544,7 @@ function handleDropdownHover() {
  * @param {number} minWidth
  */
 function handleClickOutside(targetElement, triggerElement, callback, minWidth = 0) {
+    console.log('Function called: handleClickOutside');
     document.addEventListener('click', (e) => {
         if (minWidth && window.innerWidth > minWidth) return;
         let el = e.target;
@@ -13057,6 +13567,7 @@ function handleClickOutside(targetElement, triggerElement, callback, minWidth = 
  * @param {string} mediaType - 'audio', 'video', or 'screen'
  */
 function setMediaButtonClass(button, status, mediaType) {
+    console.log('Function called: setMediaButtonClass');
     if (!button) return;
     const classMap = {
         audio: status ? className.audioOn : className.audioOff,
@@ -13071,6 +13582,7 @@ function setMediaButtonClass(button, status, mediaType) {
  * @param {Array} buttons - Array of {element, status, mediaType}
  */
 function setMediaButtonsClass(buttons) {
+    console.log('Function called: setMediaButtonsClass');
     buttons.forEach(({ element, status, mediaType }) => {
         setMediaButtonClass(element, status, mediaType);
     });
@@ -13081,6 +13593,7 @@ function setMediaButtonsClass(buttons) {
  * @param {Array} elements - Array of {element, display, mode}
  */
 function displayElements(elements) {
+    console.log('Function called: displayElements');
     elements.forEach(({ element, display, mode = 'inline' }) => {
         if (element) elemDisplay(element, display, mode);
     });
@@ -13092,5 +13605,6 @@ function displayElements(elements) {
  * @returns Promise
  */
 function sleep(ms) {
+    console.log('Function called: sleep');
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
